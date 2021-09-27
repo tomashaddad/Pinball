@@ -1,0 +1,7 @@
+# Format Style Options - Created with Clang Power Tools
+---
+BasedOnStyle: Google
+ColumnLimit: 100
+IndentWidth: 4
+AccessModifierOffset: -4
+...
