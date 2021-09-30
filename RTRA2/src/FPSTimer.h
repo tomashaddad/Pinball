@@ -1,26 +1,27 @@
 #pragma once
 
-#include "SDLManager.h"
 #include <memory>
+
+#include "SDLManager.h"
 
 class FPSTimer {
 public:
-	FPSTimer(std::shared_ptr<SDLManager> sdlManager);
+    FPSTimer(std::shared_ptr<SDLManager> sdlManager);
 
-	void start();
-	void end();
-	const float getAverageFPS();
-
-private:
-	const float getFPS();
+    void start();
+    void end();
+    const float getAverageFPS();
 
 private:
-	std::shared_ptr<SDLManager> m_sdlManager;
+    const float getFPS();
 
-	unsigned int m_start;
-	unsigned int m_end;
+private:
+    std::shared_ptr<SDLManager> m_sdlManager;
 
-	unsigned int m_counter;
-	float m_runningFps;
-	float m_averageFps;
+    unsigned int m_start;
+    unsigned int m_end;
+
+    unsigned int m_counter;
+    float m_runningFps;
+    float m_averageFps;
 };

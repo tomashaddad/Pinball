@@ -2,11 +2,9 @@
 
 #include <iostream>
 
-
 GLManager::GLManager()
     : m_depthTesting(true)
-    , m_cullBackFace(true)
-{
+    , m_cullBackFace(true) {
     // non-changing state
     glDepthFunc(GL_LESS);
     glFrontFace(GL_CCW);
@@ -37,10 +35,6 @@ void GLManager::toggleBackFaceCulling() {
     }
 }
 
-const bool GLManager::isDepthTesting() const {
-    return m_depthTesting;
-}
+const bool GLManager::isDepthTesting() const { return m_depthTesting; }
 
-const bool GLManager::isCullingBackFaces() const {
-    return m_cullBackFace;
-}
+const bool GLManager::isCullingBackFaces() const { return m_cullBackFace; }

@@ -2,26 +2,21 @@
 
 #include <glad/glad.h>
 
-#include "api/Shader.h"
-
-#include <iostream>
-
 #include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/string_cast.hpp>
 #include <glm/gtc/quaternion.hpp>
 #include <glm/gtx/quaternion.hpp>
+#include <glm/gtx/string_cast.hpp>
+#include <iostream>
+
+#include "api/Shader.h"
 
 Sandbox::Sandbox(std::shared_ptr<Camera> camera)
     : m_camera(camera)
-    , m_bagShader("./src/shaders/scene00/model_loading/bag.vert", "./src/shaders/scene00/model_loading/bag.frag")
-    , m_bagModel("./src/assets/backpack/backpack.obj")
-{
+    , m_bagShader("./src/shaders/scene00/model_loading/bag.vert",
+                  "./src/shaders/scene00/model_loading/bag.frag")
+    , m_bagModel("./src/assets/backpack/backpack.obj") {}
 
-}
-
-Sandbox::~Sandbox() {
-    std::cout << "Scene00 destructor called!" << std::endl;
-}
+Sandbox::~Sandbox() { std::cout << "Scene00 destructor called!" << std::endl; }
 
 void Sandbox::render() {
     glm::mat4 model = glm::mat4(1.0f);

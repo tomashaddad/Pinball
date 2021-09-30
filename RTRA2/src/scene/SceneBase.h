@@ -2,5 +2,5 @@
 
 class SceneBase {
 public:
-	virtual void render() = 0;
+    virtual void render() = 0;
 };

@@ -1,54 +1,52 @@
 #pragma once
 
-#include <string>
-#include <memory>
 #include <array>
-
-#include "SDLManager.h"
-#include "GLManager.h"
-
-#include "scene/SceneBase.h"
+#include <memory>
+#include <string>
 
 #include "Camera.h"
-
-#include "Text.h"
 #include "FPSTimer.h"
+#include "GLManager.h"
+#include "SDLManager.h"
+#include "Text.h"
+#include "scene/SceneBase.h"
 
 enum class State {
-	GOOD,
-	RUN,
-	QUIT,
+    GOOD,
+    RUN,
+    QUIT,
 };
 
 class RTRApp {
 public:
-	RTRApp(const std::string& title, unsigned int width = 1920, unsigned int height = 1080, bool fullscreen = false);
+    RTRApp(const std::string& title, unsigned int width = 1920, unsigned int height = 1080,
+           bool fullscreen = false);
 
-	void run();
+    void run();
 
-	void checkInput(float dt);
-	void switchToScene(unsigned int sceneNumber);
-	void renderFrame(float dt);
-	void quit();
+    void checkInput(float dt);
+    void switchToScene(unsigned int sceneNumber);
+    void renderFrame(float dt);
+    void quit();
 
 public:
-	SDLManager* getSDLManager() const;
-	GLManager* getGLManager() const;
-	Camera* getCamera() const;
-	SceneBase* getScene() const;
-	Text* getText() const;
-	FPSTimer* getFPSTimer() const;
+    SDLManager* getSDLManager() const;
+    GLManager* getGLManager() const;
+    Camera* getCamera() const;
+    SceneBase* getScene() const;
+    Text* getText() const;
+    FPSTimer* getFPSTimer() const;
 
-	const unsigned int getCurrentSceneNumber() const;
+    const unsigned int getCurrentSceneNumber() const;
 
 private:
-	State m_state;
-	unsigned int m_currentSceneNumber;
+    State m_state;
+    unsigned int m_currentSceneNumber;
 
-	std::shared_ptr<SDLManager> m_sdlManager;
-	std::shared_ptr<GLManager> m_glManager;
-	std::shared_ptr<Camera> m_camera;
-	std::shared_ptr<SceneBase> m_currentScene;
-	std::shared_ptr<Text> m_text;
-	std::shared_ptr<FPSTimer> m_fpsTimer;
+    std::shared_ptr<SDLManager> m_sdlManager;
+    std::shared_ptr<GLManager> m_glManager;
+    std::shared_ptr<Camera> m_camera;
+    std::shared_ptr<SceneBase> m_currentScene;
+    std::shared_ptr<Text> m_text;
+    std::shared_ptr<FPSTimer> m_fpsTimer;
 };

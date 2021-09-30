@@ -6,7 +6,8 @@
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
-Model::Model(const std::string& path, bool gamma) : m_gammaCorrection(gamma) {
+Model::Model(const std::string& path, bool gamma)
+    : m_gammaCorrection(gamma) {
     Assimp::Importer importer;
     const aiScene* scene = importer.ReadFile(
         path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace);
