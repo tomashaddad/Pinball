@@ -177,37 +177,39 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Skybox.cpp" />
     <ClCompile Include="src\textures\Model.cpp" />
     <ClCompile Include="src\textures\Mesh.cpp" />
     <ClCompile Include="src\scene\Pinball.cpp" />
     <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\FPSTimer.cpp" />
+    <ClCompile Include="src\utility\FPSTimer.cpp" />
     <ClCompile Include="src\LightManager.cpp" />
     <ClCompile Include="src\scene\Sandbox.cpp" />
     <ClCompile Include="src\api\Shader.cpp" />
-    <ClCompile Include="src\GLException.cpp" />
+    <ClCompile Include="src\exceptions\GLException.cpp" />
     <ClCompile Include="src\GLManager.cpp" />
     <ClCompile Include="src\RTRApp.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\dependencies\glm\detail\glm.cpp" />
     <ClCompile Include="src\SDLManager.cpp" />
-    <ClCompile Include="src\Text.cpp" />
+    <ClCompile Include="src\utility\Text.cpp" />
     <ClCompile Include="src\Transformation.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Skybox.h" />
     <ClInclude Include="src\textures\Material.h" />
     <ClInclude Include="src\textures\Model.h" />
     <ClInclude Include="src\textures\Mesh.h" />
     <ClInclude Include="src\scene\Pinball.h" />
     <ClInclude Include="src\LightManager.h" />
     <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\FPSTimer.h" />
+    <ClInclude Include="src\utility\FPSTimer.h" />
     <ClInclude Include="src\scene\SceneBase.h" />
     <ClInclude Include="src\scene\Sandbox.h" />
     <ClInclude Include="src\api\Shader.h" />
     <ClInclude Include="src\dependencies\gltext.h" />
-    <ClInclude Include="src\GLException.h" />
+    <ClInclude Include="src\exceptions\GLException.h" />
     <ClInclude Include="src\GLManager.h" />
     <ClInclude Include="src\RTRApp.h" />
     <ClInclude Include="src\dependencies\glm\common.hpp" />
@@ -494,7 +496,7 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClInclude Include="src\dependencies\glm\vector_relational.hpp" />
     <ClInclude Include="src\dependencies\stb_image.h" />
     <ClInclude Include="src\SDLManager.h" />
-    <ClInclude Include="src\Text.h" />
+    <ClInclude Include="src\utility\Text.h" />
     <ClInclude Include="src\textures\Texture.h" />
     <ClInclude Include="src\textures\Vertex.h" />
     <ClInclude Include="src\Transformation.h" />
@@ -638,6 +640,8 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <None Include="src\dependencies\glm\gtx\wrap.inl" />
     <None Include="src\shaders\scene00\model_loading\bag.frag" />
     <None Include="src\shaders\scene00\model_loading\bag.vert" />
+    <None Include="src\shaders\skybox\skybox.frag" />
+    <None Include="src\shaders\skybox\skybox.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

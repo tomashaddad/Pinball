@@ -20,10 +20,8 @@ public:
          std::vector<Texture> textures, Material material);
     void draw(Shader& shader);
 
-public:
-    unsigned int m_VAO;
-
 private:
+    unsigned int m_VAO;
     unsigned int m_VBO;
     unsigned int m_EBO;
 };

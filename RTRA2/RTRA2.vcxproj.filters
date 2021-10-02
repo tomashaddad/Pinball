@@ -33,7 +33,7 @@
     <ClCompile Include="src\SDLManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\GLException.cpp">
+    <ClCompile Include="src\exceptions\GLException.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\api\Shader.cpp">
@@ -45,10 +45,10 @@
     <ClCompile Include="src\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Text.cpp">
+    <ClCompile Include="src\utility\Text.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\FPSTimer.cpp">
+    <ClCompile Include="src\utility\FPSTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Transformation.cpp">
@@ -64,6 +64,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\textures\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -926,7 +929,7 @@
     <ClInclude Include="src\SDLManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GLException.h">
+    <ClInclude Include="src\exceptions\GLException.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\api\Shader.h">
@@ -941,10 +944,10 @@
     <ClInclude Include="src\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Text.h">
+    <ClInclude Include="src\utility\Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\FPSTimer.h">
+    <ClInclude Include="src\utility\FPSTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\scene\SceneBase.h">
@@ -972,6 +975,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\textures\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1386,5 +1392,7 @@
     </None>
     <None Include="src\shaders\scene00\model_loading\bag.vert" />
     <None Include="src\shaders\scene00\model_loading\bag.frag" />
+    <None Include="src\shaders\skybox\skybox.vert" />
+    <None Include="src\shaders\skybox\skybox.frag" />
   </ItemGroup>
 </Project>

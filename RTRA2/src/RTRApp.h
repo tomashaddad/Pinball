@@ -5,11 +5,11 @@
 #include <string>
 
 #include "Camera.h"
-#include "FPSTimer.h"
 #include "GLManager.h"
 #include "SDLManager.h"
-#include "Text.h"
 #include "scene/SceneBase.h"
+#include "utility/FPSTimer.h"
+#include "utility/Text.h"
 
 enum class State {
     GOOD,

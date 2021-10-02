@@ -1,8 +1,8 @@
 #include <iostream>
 #include <memory>
 
-#include "GLException.h"
 #include "RTRApp.h"
+#include "exceptions/GLException.h"
 
 int main(int argc, char** argv) {
     try {

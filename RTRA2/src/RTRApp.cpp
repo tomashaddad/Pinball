@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-#include "FPSTimer.h"
 #include "scene/Pinball.h"
 #include "scene/Sandbox.h"
+#include "utility/FPSTimer.h"
 
 RTRApp::RTRApp(const std::string& title, unsigned int width, unsigned int height, bool fullscreen)
     : m_state(State::GOOD)
