@@ -23,6 +23,5 @@ uniform samplerCube skybox;
 void main() {
 	vec3 incident = normalize(vertexOut.position - cameraPosition);
 	vec3 reflection = reflect(incident, normalize(vertexOut.normal));
-    // fragment = texture(texture_diffuse1, vertexOut.texcoord);
-	fragment = vec4(texture(skybox, reflection).rgb, 1.0);
+	fragment = texture(skybox, reflection) * 0.3 + texture(texture_diffuse1, vertexOut.texcoord);
 }
