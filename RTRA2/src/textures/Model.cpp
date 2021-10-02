@@ -21,9 +21,9 @@ Model::Model(const std::string& path, bool gamma)
     processNode(scene->mRootNode, scene);
 }
 
-void Model::draw(Shader& shader) {
+void Model::draw(Shader& shader, GLuint skyboxTextureID) {
     for (unsigned int i = 0; i < m_meshes.size(); i++) {
-        m_meshes[i].draw(shader);
+        m_meshes[i].draw(shader, skyboxTextureID);
     }
 }
 

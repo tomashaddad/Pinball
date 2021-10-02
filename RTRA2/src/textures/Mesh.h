@@ -18,7 +18,7 @@ public:
 
     Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
          std::vector<Texture> textures, Material material);
-    void draw(Shader& shader);
+    void draw(Shader& shader, GLuint skyboxTextureID);
 
 private:
     unsigned int m_VAO;

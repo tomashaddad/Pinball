@@ -14,6 +14,9 @@ public:
 
     void draw();
 
+public:
+    GLuint getTextureID();
+
 private:
     GLuint loadSkybox(std::vector<std::string> faces);
 

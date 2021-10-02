@@ -110,3 +110,5 @@ void Skybox::draw() {
     glBindVertexArray(0);
     glDepthFunc(GL_LESS);
 }
+
+GLuint Skybox::getTextureID() { return m_skyboxTexture; }

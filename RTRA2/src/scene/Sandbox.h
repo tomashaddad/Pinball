@@ -10,7 +10,6 @@
 class Sandbox : public SceneBase {
 public:
     Sandbox(std::shared_ptr<Camera> camera);
-    ~Sandbox();
     void render() override;
 
 private:

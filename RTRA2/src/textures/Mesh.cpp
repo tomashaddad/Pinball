@@ -57,7 +57,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
     glBindVertexArray(0);
 }
 
-void Mesh::draw(Shader& shader) {
+void Mesh::draw(Shader& shader, GLuint skyboxTextureID) {
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
     unsigned int normalNr = 1;
@@ -70,23 +70,26 @@ void Mesh::draw(Shader& shader) {
 
         switch (type) {
             case TextureType::DIFFUSE:
-                shader.setFloat(("material.texture_diffuse" + std::to_string(diffuseNr++)).c_str(),
-                                i);
+                shader.setInt(("texture_diffuse" + std::to_string(diffuseNr++)).c_str(), i);
                 break;
             case TextureType::SPECULAR:
-                shader.setFloat(
-                    ("material.texture_specular" + std::to_string(specularNr++)).c_str(), i);
+                shader.setInt(("texture_specular" + std::to_string(specularNr++)).c_str(), i);
                 break;
             case TextureType::NORMAL:
-                shader.setFloat(("material.texture_normal" + std::to_string(normalNr++)).c_str(),
-                                i);
+                shader.setInt(("texture_normal" + std::to_string(normalNr++)).c_str(), i);
                 break;
             case TextureType::HEIGHT:
-                shader.setFloat(("material.texture_height" + std::to_string(heightNr++)).c_str(),
-                                i);
+                shader.setInt(("texture_height" + std::to_string(heightNr++)).c_str(), i);
                 break;
         }
         glBindTexture(GL_TEXTURE_2D, m_textures[i].id);
+    }
+
+    // If this model is meant to reflect the skybox
+    if (skyboxTextureID) {
+        shader.setInt("skybox", m_textures.size());
+        glActiveTexture(GL_TEXTURE0 + m_textures.size());
+        glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTextureID);
     }
 
     shader.setMaterial("material", m_material);
