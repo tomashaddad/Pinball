@@ -57,6 +57,8 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
     glBindVertexArray(0);
 }
 
+#include <iostream>
+
 void Mesh::draw(Shader& shader, GLuint skyboxTextureID) {
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
@@ -92,7 +94,7 @@ void Mesh::draw(Shader& shader, GLuint skyboxTextureID) {
         glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTextureID);
     }
 
-    shader.setMaterial("material", m_material);
+    // shader.setMaterial("material", m_material);
 
     glBindVertexArray(m_VAO);
     glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, 0);

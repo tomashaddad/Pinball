@@ -9,8 +9,9 @@
 Model::Model(const std::string& path, bool gamma)
     : m_gammaCorrection(gamma) {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(
-        path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace);
+    const aiScene* scene =
+        importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals |
+                                    aiProcess_CalcTangentSpace | aiProcess_FlipUVs);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
@@ -93,6 +94,11 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
     glm::vec3 ambient(amb.r, amb.g, amb.b);
     glm::vec3 specular(spec.r, spec.g, spec.b);
     Material mat({diffuse, ambient, specular, shiney});
+
+    // std::cout << diff.r << " " << diff.g << " " << diff.b << std::endl;
+    // std::cout << amb.r << " " << amb.g << " " << amb.b << std::endl;
+    // std::cout << spec.r << " " << spec.g << " " << spec.b << std::endl;
+    // std::cout << shiney << std::endl;
 
     std::vector<Texture> diffuseMaps =
         loadMaterialTextures(material, aiTextureType_DIFFUSE, TextureType::DIFFUSE);

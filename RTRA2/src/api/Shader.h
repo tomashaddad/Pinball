@@ -31,7 +31,10 @@ public:
     void setVec4f(const std::string& uniformName, const glm::vec4& value);
     void setMat3(const std::string& uniformName, const glm::mat3& matrix);
     void setMat4(const std::string& uniformName, const glm::mat4& matrix);
+
     void setMaterial(const std::string& materialName, const Material& material);
+    void setDirectionalLight(const std::string lightName, const DirectionalLight light);
+    void setPointLight(const std::string lightName, const PointLight light, int index);
 
 private:
     std::string parseFile(const std::string& file);

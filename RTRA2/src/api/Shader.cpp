@@ -128,7 +128,7 @@ GLint Shader::getUniformLocation(const std::string& uniformName) {
     GLint location = glGetUniformLocation(m_programID, uniformName.c_str());
 
     if (location == -1) {
-        // std::cerr << uniformName << " could not be found" << std::endl;
+        std::cerr << uniformName << " could not be found" << std::endl;
     }
 
     return location;
@@ -160,6 +160,23 @@ void Shader::setMat3(const std::string& uniformName, const glm::mat3& matrix) {
 
 void Shader::setMat4(const std::string& uniformName, const glm::mat4& matrix) {
     glUniformMatrix4fv(getUniformLocation(uniformName), 1, GL_FALSE, &matrix[0][0]);
+}
+
+void Shader::setDirectionalLight(const std::string lightName, const DirectionalLight light) {
+    setVec3f("directionalLight.ambient", light.ambient);
+    setVec3f("directionalLight.diffuse", light.diffuse);
+    setVec3f("directionalLight.specular", light.specular);
+    setVec3f("directionalLight.direction", light.direction);
+}
+
+void Shader::setPointLight(const std::string lightName, const PointLight light, int index) {
+    setVec3f(lightName + "[" + std::to_string(index) + "].position", light.position);
+    setVec3f(lightName + "[" + std::to_string(index) + "].ambient", light.ambient);
+    setVec3f(lightName + "[" + std::to_string(index) + "].diffuse", light.diffuse);
+    setVec3f(lightName + "[" + std::to_string(index) + "].specular", light.specular);
+    setFloat(lightName + "[" + std::to_string(index) + "].constant", light.constant);
+    setFloat(lightName + "[" + std::to_string(index) + "].linear", light.linear);
+    setFloat(lightName + "[" + std::to_string(index) + "].quadratic", light.quadratic);
 }
 
 void Shader::setMaterial(const std::string& materialName, const Material& material) {

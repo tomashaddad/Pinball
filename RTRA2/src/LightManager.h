@@ -32,12 +32,16 @@ public:
 
     void addPointLight(glm::vec3 ambient, glm::vec3 diffuse, glm::vec3 specular, glm::vec3 position,
                        float constant, float linear, float quadratic);
-    const DirectionalLight& getDirectionalLight() const;
+    const DirectionalLight& getDirectionalLight();
     const std::vector<PointLight>& getPointLights() const;
     const float getTypeAsFloat(Light light) const;
+    const unsigned int getMaxPointLights() const;
+    const unsigned int sizeOfPointLights() const;
 
 private:
     std::shared_ptr<Camera> m_camera;
+
+    unsigned int m_maxPointLights;
 
     DirectionalLight m_directional;
     std::vector<PointLight> m_pointLights;

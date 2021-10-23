@@ -100,7 +100,6 @@ GLuint Skybox::loadSkybox(std::vector<std::string> faces) {
 void Skybox::draw() {
     glDepthFunc(GL_LEQUAL);
     m_shader.bind();
-    m_shader.setMat4("model", glm::mat4(1.0f));
     m_shader.setMat4("view", glm::mat4(glm::mat3(m_camera->getViewMatrix())));
     m_shader.setMat4("projection", m_camera->getProjectionMatrix());
     glBindVertexArray(m_VAO);

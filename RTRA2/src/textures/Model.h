@@ -12,7 +12,7 @@
 class Model {
 public:
     Model(const std::string& path, bool gamma = false);
-    void draw(Shader& shader, GLuint skyboxTextureID);
+    void draw(Shader& shader, GLuint skyboxTextureID = 0);
 
 public:
     // model data
