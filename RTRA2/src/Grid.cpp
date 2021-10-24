@@ -14,18 +14,24 @@
 Grid::Grid(std::shared_ptr<Camera> camera, unsigned int rows, unsigned int columns,
            float cellLength)
     : m_gridShader("./src/shaders/grid/grid.vert", "./src/shaders/grid/grid.frag")
-    , m_camera(camera) {
+    , m_camera(camera)
+    , m_cellLength(cellLength)
+    , m_columns(columns)
+    , m_rows(rows)
+    , m_width(cellLength * columns)
+    , m_height(cellLength * rows) {
+    m_transform.setTranslation({-m_width / 2.0f, 0.5f, -m_height / 2.0f});  // centre and raise
+
     std::vector<std::vector<unsigned int>> indexGrid;
 
     unsigned int index = 0;
-    float width = cellLength * columns;
-    float height = cellLength * rows;
-
+    float x = 0;
+    float z = 0;
     for (int row = 0; row <= rows; ++row) {
         std::vector<unsigned int> indexRow;
         for (int col = 0; col <= columns; ++col) {
-            float x = width * ((float)col / (float)columns);
-            float z = height * ((float)row / (float)rows);
+            x = m_width * static_cast<float>(col) / static_cast<float>(columns);
+            z = m_height * static_cast<float>(row) / static_cast<float>(rows);
 
             m_vertices.emplace_back(x, 0, z);
             indexRow.emplace_back(index++);
@@ -65,15 +71,10 @@ Grid::Grid(std::shared_ptr<Camera> camera, unsigned int rows, unsigned int colum
 }
 
 void Grid::draw() {
-    glm::mat4 model = glm::mat4(1.0f);
-    glm::mat4 view = m_camera->getViewMatrix();
-    glm::mat4 projection = m_camera->getProjectionMatrix();
-
     m_gridShader.bind();
-
-    m_gridShader.setMat4("model", model);
-    m_gridShader.setMat4("view", view);
-    m_gridShader.setMat4("projection", projection);
+    m_gridShader.setMat4("model", m_transform.getModelMatrix());
+    m_gridShader.setMat4("view", m_camera->getViewMatrix());
+    m_gridShader.setMat4("projection", m_camera->getProjectionMatrix());
 
     glBindVertexArray(m_VAO);
     glDrawElements(GL_LINES, m_length, GL_UNSIGNED_INT, NULL);

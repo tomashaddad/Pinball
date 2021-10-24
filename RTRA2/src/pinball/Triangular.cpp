@@ -1,1 +1,0 @@
-#include "Triangular.h"

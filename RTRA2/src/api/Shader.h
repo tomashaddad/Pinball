@@ -6,7 +6,13 @@
 #include <string>
 
 #include "LightManager.h"
-#include "textures/Material.h"
+#include "model/Material.h"
+
+struct ShaderPath {
+    const std::string& vertexShader;
+    const std::string& fragmentShader;
+    const std::string& geometryShader = "";
+};
 
 class Shader {
 public:

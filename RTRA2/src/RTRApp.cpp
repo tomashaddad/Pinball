@@ -10,7 +10,8 @@ RTRApp::RTRApp(const std::string& title, unsigned int width, unsigned int height
     , m_sdlManager(std::make_shared<SDLManager>(title, width, height, fullscreen))
     , m_glManager(std::make_shared<GLManager>())
     , m_camera(std::make_shared<Camera>(m_sdlManager))
-    , m_pinballScene(std::make_shared<PinballScene>(m_camera))
+    , m_lightManager(std::make_shared<LightManager>(m_camera))
+    , m_pinballScene(std::make_shared<PinballScene>(m_camera, m_lightManager))
     , m_fpsTimer(std::make_shared<FPSTimer>(m_sdlManager))
     , m_text(std::make_shared<Text>())
     , m_grid(m_camera, 5, 10, 0.5) {}
