@@ -4,6 +4,7 @@
 
 #include "Camera.h"
 #include "LightManager.h"
+#include "Transformation.h"
 #include "api/Shader.h"
 #include "collision/Collider.h"
 #include "model/Model.h"
@@ -15,6 +16,7 @@ public:
                       std::shared_ptr<LightManager> lightManager) = 0;
 
 protected:
+    Transformation m_transformation;
     Collider m_collider;
     Model m_model;
     Shader m_shader;

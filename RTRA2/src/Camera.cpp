@@ -8,8 +8,8 @@ Camera::Camera(std::shared_ptr<SDLManager> sdlManager)
     , m_fov(45.0f)
     , m_near(0.1f)
     , m_far(100.0f)
-    , m_position(glm::vec3(0.0f))
-    , m_rotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f))
+    , m_position({0.0f, 9.0f, 6.0f})
+    , m_rotation(glm::angleAxis(glm::radians(-60.0f), glm::vec3(1.0f, 0.0f, 0.0f)))
     , m_movementSpeed(3)
     , m_rotationSpeed(50)
     , m_mouseSpeed(0.001) {}
@@ -47,8 +47,8 @@ void Camera::rollRight(const float dt) {
 }
 
 void Camera::reset() {
-    m_position = glm::vec3(0.0f);
-    m_rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f);
+    m_position = {0.0f, 9.0f, 6.0f};
+    m_rotation = glm::angleAxis(glm::radians(-60.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
 glm::vec3 Camera::getPosition() const { return m_position; }

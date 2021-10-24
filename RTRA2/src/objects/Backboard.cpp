@@ -6,10 +6,16 @@
 Backboard::Backboard()
     : Object(Model("./src/assets/PinballTable3/Backboard.fbx"),
              {"./src/shaders/pinball/basic.vert", "./src/shaders/pinball/basic.frag"},
-             Rectangular()) {}
+             Rectangular()) {
+    m_transformation.setScaling({
+        10.0f,
+        10.0f,
+        10.0f,
+    });
+}
 
 void Backboard::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> lightManager) {
-    glm::mat4 model = glm::mat4(1.0f);
+    glm::mat4 model = m_transformation.getModelMatrix();
     glm::mat4 view = camera->getViewMatrix();
     glm::mat4 projection = camera->getProjectionMatrix();
 

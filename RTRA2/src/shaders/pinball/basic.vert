@@ -15,7 +15,7 @@ uniform mat4 projection;
 
 void main() {
     vertexOut.position = vec3(model * vec4(position, 1.0));
-    vertexOut.normal = mat3(transpose(inverse(model))) * normal;
+    vertexOut.normal = normalize(mat3(transpose(inverse(model))) * normal);
     vertexOut.texcoord = texcoord;
 
     gl_Position = projection * view * model * vec4(position, 1.0);

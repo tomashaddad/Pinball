@@ -13,7 +13,7 @@
 
 Grid::Grid(std::shared_ptr<Camera> camera, unsigned int rows, unsigned int columns,
            float cellLength)
-    : m_gridShader("./src/shaders/grid/grid.vert", "./src/shaders/grid/grid.frag")
+    : m_gridShader({"./src/shaders/grid/grid.vert", "./src/shaders/grid/grid.frag"})
     , m_camera(camera)
     , m_cellLength(cellLength)
     , m_columns(columns)

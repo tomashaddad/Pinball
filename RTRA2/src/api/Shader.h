@@ -16,8 +16,7 @@ struct ShaderPath {
 
 class Shader {
 public:
-    Shader(const std::string& vertexShader, const std::string& fragmentShader,
-           const std::string& geometryShader = "", const bool& fromFile = true);
+    Shader(ShaderPath paths, const bool& fromFile = true);
     ~Shader();
 
     // Prevent copying and assignment of shaders

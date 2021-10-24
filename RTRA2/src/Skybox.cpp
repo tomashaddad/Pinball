@@ -6,7 +6,7 @@
 
 Skybox::Skybox(std::shared_ptr<Camera> camera)
     : m_camera(camera)
-    , m_shader("./src/shaders/skybox/skybox.vert", "./src/shaders/skybox/skybox.frag") {
+    , m_shader({"./src/shaders/skybox/skybox.vert", "./src/shaders/skybox/skybox.frag"}) {
     std::vector<std::string> faces{
         "./src/assets/skybox/right.png", "./src/assets/skybox/left.png",
         "./src/assets/skybox/top.png",   "./src/assets/skybox/bottom.png",

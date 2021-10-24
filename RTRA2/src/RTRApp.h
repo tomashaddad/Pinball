@@ -22,7 +22,7 @@ enum class State {
 class RTRApp {
 public:
     RTRApp(const std::string& title, unsigned int width = 1920, unsigned int height = 1080,
-           bool fullscreen = false);
+           bool fullscreen = true);
 
     void run();
 
