@@ -5,13 +5,11 @@
 
 Backboard::Backboard()
     : Object(Model("./src/assets/PinballTable3/Backboard.fbx"),
-             {"./src/shaders/pinball/basic.vert", "./src/shaders/pinball/basic.frag"},
-             Rectangular()) {
-    m_transformation.setScaling({
-        10.0f,
-        10.0f,
-        10.0f,
-    });
+             {"./src/shaders/pinball/basic.vert", "./src/shaders/pinball/basic.frag"}) {
+    m_collider = Rectangular(m_model);
+    glm::vec3 scale{10.0f, 10.0f, 10.0f};
+    m_transformation.setScaling(scale);
+    m_collider.update(m_transformation);
 }
 
 void Backboard::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> lightManager) {

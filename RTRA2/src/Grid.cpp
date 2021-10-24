@@ -11,16 +11,16 @@
     to the indices array as pairs so that the grid can be drawn as GL_LINES.
 */
 
-Grid::Grid(std::shared_ptr<Camera> camera, unsigned int rows, unsigned int columns,
-           float cellLength)
+Grid::Grid(unsigned int rows, unsigned int columns, float cellLength)
     : m_gridShader({"./src/shaders/grid/grid.vert", "./src/shaders/grid/grid.frag"})
-    , m_camera(camera)
     , m_cellLength(cellLength)
     , m_columns(columns)
     , m_rows(rows)
     , m_width(cellLength * columns)
     , m_height(cellLength * rows) {
-    m_transform.setTranslation({-m_width / 2.0f, 0.5f, -m_height / 2.0f});  // centre and raise
+    // m_transform.setTranslation({-m_width / 2.0f, 0.5f, -m_height / 2.0f});  // centre and raise
+
+    m_transform.setTranslation({2.08357, 0.0520468, 4.1598});
 
     std::vector<std::vector<unsigned int>> indexGrid;
 
@@ -70,11 +70,11 @@ Grid::Grid(std::shared_ptr<Camera> camera, unsigned int rows, unsigned int colum
     m_length = (unsigned int)m_indices.size() * 4;
 }
 
-void Grid::draw() {
+void Grid::draw(std::shared_ptr<Camera> camera) {
     m_gridShader.bind();
     m_gridShader.setMat4("model", m_transform.getModelMatrix());
-    m_gridShader.setMat4("view", m_camera->getViewMatrix());
-    m_gridShader.setMat4("projection", m_camera->getProjectionMatrix());
+    m_gridShader.setMat4("view", camera->getViewMatrix());
+    m_gridShader.setMat4("projection", camera->getProjectionMatrix());
 
     glBindVertexArray(m_VAO);
     glDrawElements(GL_LINES, m_length, GL_UNSIGNED_INT, NULL);

@@ -1,3 +1,4 @@
 #include "Rectangular.h"
 
-Rectangular::Rectangular() {}
+Rectangular::Rectangular(Model& model)
+    : Collider(model) {}

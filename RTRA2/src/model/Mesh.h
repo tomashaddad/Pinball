@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "Vertex.h"
 #include "api/Shader.h"
+#include "model/BoundingBox.h"
 
 class Mesh {
 public:
@@ -15,9 +16,10 @@ public:
     std::vector<unsigned int> m_indices;
     std::vector<Texture> m_textures;
     Material m_material;
+    BoundingBox m_boundingBox;
 
     Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
-         std::vector<Texture> textures, Material material);
+         std::vector<Texture> textures, Material material, BoundingBox boundingBox);
     void draw(Shader& shader, GLuint skyboxTextureID);
 
 private:

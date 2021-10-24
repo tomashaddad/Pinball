@@ -10,11 +10,10 @@
 
 class Grid {
 public:
-    Grid(std::shared_ptr<Camera> camera, unsigned int rows, unsigned int columns, float cellLength);
-    void draw();
+    Grid(unsigned int rows, unsigned int columns, float cellLength);
+    void draw(std::shared_ptr<Camera> camera);
 
 private:
-    std::shared_ptr<Camera> m_camera;
     Shader m_gridShader;
     Transformation m_transform;
 

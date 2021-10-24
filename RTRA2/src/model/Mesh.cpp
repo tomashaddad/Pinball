@@ -3,11 +3,12 @@
 #include <glad/glad.h>
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
-           std::vector<Texture> textures, Material material)
+           std::vector<Texture> textures, Material material, BoundingBox boundingBox)
     : m_vertices(vertices)
     , m_indices(indices)
     , m_textures(textures)
     , m_material(material)
+    , m_boundingBox(boundingBox)
     , m_VAO(0)
     , m_VBO(0)
     , m_EBO(0) {

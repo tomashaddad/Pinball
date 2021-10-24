@@ -3,15 +3,17 @@
 #include <algorithm>
 #include <iostream>
 
+#include "model/BoundingBox.h"
+
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
 Model::Model(const std::string& path, bool gamma)
     : m_gammaCorrection(gamma) {
     Assimp::Importer importer;
-    const aiScene* scene =
-        importer.ReadFile(path, aiProcess_Triangulate | aiProcess_GenSmoothNormals |
-                                    aiProcess_CalcTangentSpace | aiProcess_FlipUVs);
+    const aiScene* scene = importer.ReadFile(
+        path, aiProcess_Triangulate | aiProcess_GenSmoothNormals | aiProcess_CalcTangentSpace |
+                  aiProcess_FlipUVs | aiProcess_GenBoundingBoxes);
 
     if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
         std::cout << "ERROR::ASSIMP::" << importer.GetErrorString() << std::endl;
@@ -116,7 +118,11 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
         loadMaterialTextures(material, aiTextureType_AMBIENT, TextureType::HEIGHT);
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
-    return Mesh(vertices, indices, textures, mat);
+    glm::vec4 min{mesh->mAABB.mMin.x, mesh->mAABB.mMin.y, mesh->mAABB.mMin.z, 1.0f};
+    glm::vec4 max{mesh->mAABB.mMax.x, mesh->mAABB.mMax.y, mesh->mAABB.mMax.z, 1.0f};
+    BoundingBox boundingBox{min, max};
+
+    return Mesh(vertices, indices, textures, mat, boundingBox);
 }
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,
