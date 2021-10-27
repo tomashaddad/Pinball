@@ -6,9 +6,9 @@
 
 #include "Camera.h"
 #include "GLManager.h"
-#include "Grid.h"
 #include "LightManager.h"
 #include "SDLManager.h"
+#include "collision/UGrid2D.h"
 #include "scene/PinballScene.h"
 #include "utility/FPSTimer.h"
 #include "utility/Text.h"
@@ -40,6 +40,5 @@ private:
     std::shared_ptr<PinballScene> m_pinballScene;  // depends on LightManager, Camera
     std::shared_ptr<FPSTimer> m_fpsTimer;          // depends on SDLManager
     std::shared_ptr<Text> m_text;
-
-    Grid m_grid;
+    std::shared_ptr<UGrid2D> m_uGrid2D;
 };

@@ -22,6 +22,7 @@ PinballScene::PinballScene(std::shared_ptr<Camera> camera,
 void PinballScene::render() {
     for (auto& object : m_objects) {
         object->draw(m_camera, m_lightManager);
+        object->drawBoundingBox(m_camera);
     }
 
     m_skybox.draw();

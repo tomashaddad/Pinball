@@ -3,12 +3,13 @@
 #include <glad/glad.h>
 
 Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
-           std::vector<Texture> textures, Material material, BoundingBox boundingBox)
+           std::vector<Texture> textures, Material material, glm::vec3 min, glm::vec3 max)
     : m_vertices(vertices)
     , m_indices(indices)
     , m_textures(textures)
     , m_material(material)
-    , m_boundingBox(boundingBox)
+    , m_min(min)
+    , m_max(max)
     , m_VAO(0)
     , m_VBO(0)
     , m_EBO(0) {
@@ -60,7 +61,7 @@ Mesh::Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
 
 #include <iostream>
 
-void Mesh::draw(Shader& shader, GLuint skyboxTextureID) {
+void Mesh::draw(std::shared_ptr<Shader> shader, GLuint skyboxTextureID) {
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
     unsigned int normalNr = 1;
@@ -73,16 +74,16 @@ void Mesh::draw(Shader& shader, GLuint skyboxTextureID) {
 
         switch (type) {
             case TextureType::DIFFUSE:
-                shader.setInt(("texture_diffuse" + std::to_string(diffuseNr++)).c_str(), i);
+                shader->setInt(("texture_diffuse" + std::to_string(diffuseNr++)).c_str(), i);
                 break;
             case TextureType::SPECULAR:
-                shader.setInt(("texture_specular" + std::to_string(specularNr++)).c_str(), i);
+                shader->setInt(("texture_specular" + std::to_string(specularNr++)).c_str(), i);
                 break;
             case TextureType::NORMAL:
-                shader.setInt(("texture_normal" + std::to_string(normalNr++)).c_str(), i);
+                shader->setInt(("texture_normal" + std::to_string(normalNr++)).c_str(), i);
                 break;
             case TextureType::HEIGHT:
-                shader.setInt(("texture_height" + std::to_string(heightNr++)).c_str(), i);
+                shader->setInt(("texture_height" + std::to_string(heightNr++)).c_str(), i);
                 break;
         }
         glBindTexture(GL_TEXTURE_2D, m_textures[i].id);
@@ -90,7 +91,7 @@ void Mesh::draw(Shader& shader, GLuint skyboxTextureID) {
 
     // If this model is meant to reflect the skybox
     if (skyboxTextureID) {
-        shader.setInt("skybox", m_textures.size());
+        shader->setInt("skybox", m_textures.size());
         glActiveTexture(GL_TEXTURE0 + m_textures.size());
         glBindTexture(GL_TEXTURE_CUBE_MAP, skyboxTextureID);
     }

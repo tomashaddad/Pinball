@@ -24,6 +24,7 @@ public:
     void pitch(signed int degree);
     void rollLeft(const float dt);
     void rollRight(const float dt);
+    glm::quat lookAt(glm::vec3 targetPosition);
 
     void reset();
 
@@ -45,8 +46,9 @@ private:
     float m_near;
     float m_far;
 
+    glm::vec3 m_startingPosition;
+    glm::vec3 m_currentPosition;
     glm::quat m_rotation;
-    glm::vec3 m_position;
 
     const float m_movementSpeed;
     const float m_rotationSpeed;

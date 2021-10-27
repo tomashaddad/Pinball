@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -8,7 +9,6 @@
 #include "Texture.h"
 #include "Vertex.h"
 #include "api/Shader.h"
-#include "model/BoundingBox.h"
 
 class Mesh {
 public:
@@ -16,11 +16,12 @@ public:
     std::vector<unsigned int> m_indices;
     std::vector<Texture> m_textures;
     Material m_material;
-    BoundingBox m_boundingBox;
+    glm::vec3 m_min;
+    glm::vec3 m_max;
 
     Mesh(std::vector<Vertex> vertices, std::vector<unsigned int> indices,
-         std::vector<Texture> textures, Material material, BoundingBox boundingBox);
-    void draw(Shader& shader, GLuint skyboxTextureID);
+         std::vector<Texture> textures, Material material, glm::vec3 min, glm::vec3 max);
+    void draw(std::shared_ptr<Shader> shader, GLuint skyboxTextureID);
 
 private:
     unsigned int m_VAO;

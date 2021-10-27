@@ -4,21 +4,24 @@
 #include <vector>
 
 #include "Camera.h"
+#include "GridCell.h"
 #include "Transformation.h"
 #include "api/Shader.h"
 #include "glm/glm.hpp"
 
-class Grid {
+class UGrid2D {
 public:
-    Grid(unsigned int rows, unsigned int columns, float cellLength);
-    void draw(std::shared_ptr<Camera> camera);
+    UGrid2D(unsigned int rows, unsigned int columns, float cellLength,
+            std::shared_ptr<Camera> camera);
+    void draw();
 
 private:
-    Shader m_gridShader;
+    std::shared_ptr<Shader> m_gridShader;
+    std::shared_ptr<Camera> m_camera;
     Transformation m_transform;
 
+    std::vector<GridCell> m_gridCells;
     std::vector<glm::vec3> m_vertices;
-    std::vector<glm::uvec4> m_indices;
 
     unsigned int m_VAO;
     unsigned int m_VBO;

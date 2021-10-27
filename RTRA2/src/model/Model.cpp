@@ -3,8 +3,6 @@
 #include <algorithm>
 #include <iostream>
 
-#include "model/BoundingBox.h"
-
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 
@@ -24,7 +22,7 @@ Model::Model(const std::string& path, bool gamma)
     processNode(scene->mRootNode, scene);
 }
 
-void Model::draw(Shader& shader, GLuint skyboxTextureID) {
+void Model::draw(std::shared_ptr<Shader> shader, GLuint skyboxTextureID) {
     for (unsigned int i = 0; i < m_meshes.size(); i++) {
         m_meshes[i].draw(shader, skyboxTextureID);
     }
@@ -118,11 +116,10 @@ Mesh Model::processMesh(aiMesh* mesh, const aiScene* scene) {
         loadMaterialTextures(material, aiTextureType_AMBIENT, TextureType::HEIGHT);
     textures.insert(textures.end(), heightMaps.begin(), heightMaps.end());
 
-    glm::vec4 min{mesh->mAABB.mMin.x, mesh->mAABB.mMin.y, mesh->mAABB.mMin.z, 1.0f};
-    glm::vec4 max{mesh->mAABB.mMax.x, mesh->mAABB.mMax.y, mesh->mAABB.mMax.z, 1.0f};
-    BoundingBox boundingBox{min, max};
+    glm::vec3 min{mesh->mAABB.mMin.x, mesh->mAABB.mMin.y, mesh->mAABB.mMin.z};
+    glm::vec3 max{mesh->mAABB.mMax.x, mesh->mAABB.mMax.y, mesh->mAABB.mMax.z};
 
-    return Mesh(vertices, indices, textures, mat, boundingBox);
+    return Mesh(vertices, indices, textures, mat, min, max);
 }
 
 std::vector<Texture> Model::loadMaterialTextures(aiMaterial* mat, aiTextureType type,

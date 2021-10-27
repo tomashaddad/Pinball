@@ -14,7 +14,7 @@ RTRApp::RTRApp(const std::string& title, unsigned int width, unsigned int height
     , m_pinballScene(std::make_shared<PinballScene>(m_camera, m_lightManager))
     , m_fpsTimer(std::make_shared<FPSTimer>(m_sdlManager))
     , m_text(std::make_shared<Text>())
-    , m_grid(12, 5, 0.5) {}
+    , m_uGrid2D(std::make_shared<UGrid2D>(17, 9, 0.5, m_camera)) {}
 
 void RTRApp::run() {
     while (m_state != State::QUIT) {
@@ -85,7 +85,7 @@ void RTRApp::checkInput(float dt) {
 void RTRApp::renderFrame(float dt) {
     m_text->render();
     m_pinballScene->render();
-    m_grid.draw(m_camera);
+    m_uGrid2D->draw();
 }
 
 void RTRApp::quit() {

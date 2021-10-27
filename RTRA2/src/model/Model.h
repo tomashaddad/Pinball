@@ -4,15 +4,18 @@
 #include <assimp/scene.h>
 
 #include <assimp/Importer.hpp>
+#include <memory>
 #include <string>
+#include <vector>
 
 #include "Mesh.h"
+#include "Texture.h"
 #include "api/Shader.h"
 
 class Model {
 public:
     Model(const std::string& path, bool gamma = false);
-    void draw(Shader& shader, GLuint skyboxTextureID = 0);
+    void draw(std::shared_ptr<Shader>, GLuint skyboxTextureID = 0);
 
 public:
     // model data

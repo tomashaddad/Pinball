@@ -1,11 +1,35 @@
 #pragma once
 
+#include <memory>
+#include <vector>
+
+#include "Camera.h"
+#include "Transformation.h"
+#include "api/Shader.h"
 #include "glm/glm.hpp"
+#include "model/Model.h"
 
 class BoundingBox {
 public:
-    glm::vec4 min = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-    glm::vec4 max = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+    BoundingBox(const Model& model);
+    void update(const Transformation& transform);
+    void draw(std::shared_ptr<Camera> camera);
+    void recalculateBoundingBox();
 
 private:
+    std::shared_ptr<Shader> m_bbShader;
+
+    unsigned int m_VAO;
+    unsigned int m_VBO;
+    unsigned int m_IBO;
+
+    std::vector<glm::vec3> m_originalVertices;
+
+    std::vector<glm::vec3> m_vertices;
+    std::vector<glm::uvec3> m_indices;
+
+    glm::vec3 m_min;
+    glm::vec3 m_max;
+
+    Transformation m_transform;
 };

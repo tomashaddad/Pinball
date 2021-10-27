@@ -21,7 +21,7 @@ private:
     GLuint loadSkybox(std::vector<std::string> faces);
 
     std::shared_ptr<Camera> m_camera;
-    Shader m_shader;
+    std::shared_ptr<Shader> m_shader;
     GLuint m_VAO;
     GLuint m_VBO;
     GLuint m_skyboxTexture;

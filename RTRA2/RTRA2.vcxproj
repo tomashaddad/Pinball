@@ -177,14 +177,19 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\collision\GridCell.cpp" />
+    <ClCompile Include="src\model\BoundingBox.cpp" />
+    <ClCompile Include="src\objects\Object.cpp" />
+    <ClCompile Include="src\objects\Backboard.cpp" />
+    <ClCompile Include="src\collision\Collider.cpp" />
+    <ClCompile Include="src\collision\Rectangular.cpp" />
     <ClCompile Include="src\Skybox.cpp" />
-    <ClCompile Include="src\textures\Model.cpp" />
-    <ClCompile Include="src\textures\Mesh.cpp" />
-    <ClCompile Include="src\scene\Pinball.cpp" />
+    <ClCompile Include="src\model\Model.cpp" />
+    <ClCompile Include="src\model\Mesh.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\utility\FPSTimer.cpp" />
     <ClCompile Include="src\LightManager.cpp" />
-    <ClCompile Include="src\scene\Sandbox.cpp" />
+    <ClCompile Include="src\scene\PinballScene.cpp" />
     <ClCompile Include="src\api\Shader.cpp" />
     <ClCompile Include="src\exceptions\GLException.cpp" />
     <ClCompile Include="src\GLManager.cpp" />
@@ -195,18 +200,23 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClCompile Include="src\SDLManager.cpp" />
     <ClCompile Include="src\utility\Text.cpp" />
     <ClCompile Include="src\Transformation.cpp" />
+    <ClCompile Include="src\collision\UGrid2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\collision\GridCell.h" />
+    <ClInclude Include="src\model\BoundingBox.h" />
+    <ClInclude Include="src\objects\Object.h" />
+    <ClInclude Include="src\objects\Backboard.h" />
+    <ClInclude Include="src\collision\Collider.h" />
+    <ClInclude Include="src\collision\Rectangular.h" />
     <ClInclude Include="src\Skybox.h" />
-    <ClInclude Include="src\textures\Material.h" />
-    <ClInclude Include="src\textures\Model.h" />
-    <ClInclude Include="src\textures\Mesh.h" />
-    <ClInclude Include="src\scene\Pinball.h" />
+    <ClInclude Include="src\model\Material.h" />
+    <ClInclude Include="src\model\Model.h" />
+    <ClInclude Include="src\model\Mesh.h" />
     <ClInclude Include="src\LightManager.h" />
     <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\utility\FPSTimer.h" />
-    <ClInclude Include="src\scene\SceneBase.h" />
-    <ClInclude Include="src\scene\Sandbox.h" />
+    <ClInclude Include="src\scene\PinballScene.h" />
     <ClInclude Include="src\api\Shader.h" />
     <ClInclude Include="src\dependencies\gltext.h" />
     <ClInclude Include="src\exceptions\GLException.h" />
@@ -497,9 +507,10 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClInclude Include="src\dependencies\stb_image.h" />
     <ClInclude Include="src\SDLManager.h" />
     <ClInclude Include="src\utility\Text.h" />
-    <ClInclude Include="src\textures\Texture.h" />
-    <ClInclude Include="src\textures\Vertex.h" />
+    <ClInclude Include="src\model\Texture.h" />
+    <ClInclude Include="src\model\Vertex.h" />
     <ClInclude Include="src\Transformation.h" />
+    <ClInclude Include="src\collision\UGrid2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\dependencies\glm\detail\func_common.inl" />
@@ -638,8 +649,12 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <None Include="src\dependencies\glm\gtx\vector_angle.inl" />
     <None Include="src\dependencies\glm\gtx\vector_query.inl" />
     <None Include="src\dependencies\glm\gtx\wrap.inl" />
-    <None Include="src\shaders\scene00\model_loading\bag.frag" />
-    <None Include="src\shaders\scene00\model_loading\bag.vert" />
+    <None Include="src\shaders\bbox\bbox.frag" />
+    <None Include="src\shaders\bbox\bbox.vert" />
+    <None Include="src\shaders\grid\grid.frag" />
+    <None Include="src\shaders\grid\grid.vert" />
+    <None Include="src\shaders\pinball\basic.frag" />
+    <None Include="src\shaders\pinball\basic.vert" />
     <None Include="src\shaders\skybox\skybox.frag" />
     <None Include="src\shaders\skybox\skybox.vert" />
   </ItemGroup>

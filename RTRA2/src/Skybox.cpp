@@ -6,7 +6,8 @@
 
 Skybox::Skybox(std::shared_ptr<Camera> camera)
     : m_camera(camera)
-    , m_shader({"./src/shaders/skybox/skybox.vert", "./src/shaders/skybox/skybox.frag"}) {
+    , m_shader(std::make_shared<Shader>("./src/shaders/skybox/skybox.vert",
+                                        "./src/shaders/skybox/skybox.frag")) {
     std::vector<std::string> faces{
         "./src/assets/skybox/right.png", "./src/assets/skybox/left.png",
         "./src/assets/skybox/top.png",   "./src/assets/skybox/bottom.png",
@@ -59,8 +60,8 @@ Skybox::Skybox(std::shared_ptr<Camera> camera)
         1.0f, -1.0f,  1.0f};
     // clang-format on
 
-    m_shader.bind();
-    m_shader.setInt("skybox", 0);
+    m_shader->bind();
+    m_shader->setInt("skybox", 0);
 
     glGenVertexArrays(1, &m_VAO);
     glGenBuffers(1, &m_VBO);
@@ -99,9 +100,9 @@ GLuint Skybox::loadSkybox(std::vector<std::string> faces) {
 
 void Skybox::draw() {
     glDepthFunc(GL_LEQUAL);
-    m_shader.bind();
-    m_shader.setMat4("view", glm::mat4(glm::mat3(m_camera->getViewMatrix())));
-    m_shader.setMat4("projection", m_camera->getProjectionMatrix());
+    m_shader->bind();
+    m_shader->setMat4("view", glm::mat4(glm::mat3(m_camera->getViewMatrix())));
+    m_shader->setMat4("projection", m_camera->getProjectionMatrix());
     glBindVertexArray(m_VAO);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_CUBE_MAP, m_skyboxTexture);
