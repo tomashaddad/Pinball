@@ -5,7 +5,8 @@
 #include <iostream>
 #include <vector>
 
-Shader::Shader(ShaderPath paths, const bool& fromFile)
+Shader::Shader(const std::string& vertexShader, const std::string& fragmentShader,
+               const std::string& geometryShader, const bool& fromFile)
     : m_programID(0)
     , m_vertexID(0)
     , m_fragmentID(0)
@@ -16,29 +17,29 @@ Shader::Shader(ShaderPath paths, const bool& fromFile)
     std::string gs;
 
     if (fromFile) {
-        vs = parseFile(paths.vertexShader);
-        fs = parseFile(paths.fragmentShader);
-        if (!paths.geometryShader.empty()) {
-            gs = parseFile(paths.geometryShader);
+        vs = parseFile(vertexShader);
+        fs = parseFile(fragmentShader);
+        if (!geometryShader.empty()) {
+            gs = parseFile(geometryShader);
         }
     } else {
-        vs = paths.vertexShader;
-        fs = paths.fragmentShader;
-        if (!paths.geometryShader.empty()) {
-            gs = paths.geometryShader;
+        vs = vertexShader;
+        fs = fragmentShader;
+        if (!geometryShader.empty()) {
+            gs = geometryShader;
         }
     }
 
     m_programID = glCreateProgram();
     m_vertexID = compileShader(GL_VERTEX_SHADER, vs);
     m_fragmentID = compileShader(GL_FRAGMENT_SHADER, fs);
-    if (!paths.geometryShader.empty()) {
+    if (!geometryShader.empty()) {
         m_geometryID = compileShader(GL_GEOMETRY_SHADER, gs);
     }
 
     attachShaderByID(m_vertexID);
     attachShaderByID(m_fragmentID);
-    if (!paths.geometryShader.empty()) {
+    if (!geometryShader.empty()) {
         attachShaderByID(m_geometryID);
     }
 
@@ -66,7 +67,7 @@ Shader::Shader(ShaderPath paths, const bool& fromFile)
     glDetachShader(m_programID, m_fragmentID);
     glDeleteShader(m_fragmentID);
 
-    if (!paths.geometryShader.empty()) {
+    if (!geometryShader.empty()) {
         glDetachShader(m_programID, m_geometryID);
         glDeleteShader(m_geometryID);
     }

@@ -8,15 +8,10 @@
 #include "LightManager.h"
 #include "model/Material.h"
 
-struct ShaderPath {
-    const std::string& vertexShader;
-    const std::string& fragmentShader;
-    const std::string& geometryShader = "";
-};
-
 class Shader {
 public:
-    Shader(ShaderPath paths, const bool& fromFile = true);
+    Shader(const std::string& vertexShader, const std::string& fragmentShader,
+           const std::string& geometryShader = "", const bool& fromFile = true);
     ~Shader();
 
     // Prevent copying and assignment of shaders
