@@ -4,6 +4,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <iostream>
 
 std::vector<glm::uvec2> GridCell::m_indices = {{0, 1}, {1, 2}, {2, 3}, {3, 0}};
 
@@ -38,7 +39,7 @@ GridCell::GridCell(glm::vec3 topLeft, glm::vec3 topRight, glm::vec3 bottomRight,
 
 void GridCell::draw(std::shared_ptr<Camera> camera) {
     m_gridShader->bind();
-    m_gridShader->setMat4("model", glm::mat4(1.0f));  // not using the transform
+    m_gridShader->setMat4("model", glm::mat4(1.0f));  // not using a transform
     m_gridShader->setMat4("view", camera->getViewMatrix());
     m_gridShader->setMat4("projection", camera->getProjectionMatrix());
 

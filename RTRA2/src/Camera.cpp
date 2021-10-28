@@ -22,19 +22,19 @@ Camera::Camera(std::shared_ptr<SDLManager> sdlManager)
     m_rotation = lookAt({0.0f, 0.0f, 0.0f});
 }
 
-void Camera::moveForward(const float dt) {
+void Camera::moveForward(float dt) {
     m_currentPosition += m_rotation * glm::vec3(0.0f, 0.0f, -m_movementSpeed * dt);
 }
 
-void Camera::moveBackward(const float dt) {
+void Camera::moveBackward(float dt) {
     m_currentPosition += m_rotation * glm::vec3(0.0f, 0.0f, m_movementSpeed * dt);
 }
 
-void Camera::strafeLeft(const float dt) {
+void Camera::strafeLeft(float dt) {
     m_currentPosition += m_rotation * glm::vec3(-m_movementSpeed * dt, 0.0f, 0.0f);
 }
 
-void Camera::strafeRight(const float dt) {
+void Camera::strafeRight(float dt) {
     m_currentPosition += m_rotation * glm::vec3(m_movementSpeed * dt, 0.0f, 0.0f);
 }
 
@@ -46,12 +46,20 @@ void Camera::pitch(signed int degree) {
     m_rotation *= glm::angleAxis(-(float)degree * m_mouseSpeed, glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
-void Camera::rollLeft(const float dt) {
+void Camera::rollLeft(float dt) {
     m_rotation *= glm::angleAxis(glm::radians(m_rotationSpeed * dt), glm::vec3(0.0f, 0.0f, 1.0f));
 }
 
-void Camera::rollRight(const float dt) {
+void Camera::rollRight(float dt) {
     m_rotation *= glm::angleAxis(glm::radians(-m_rotationSpeed * dt), glm::vec3(0.0f, 0.0f, 1.0f));
+}
+
+void Camera::rise(float dt) {
+    m_currentPosition += m_rotation * glm::vec3(0.0f, m_movementSpeed * dt, 0.0f);
+}
+
+void Camera::fall(float dt) {
+    m_currentPosition += m_rotation * glm::vec3(0.0f, -m_movementSpeed * dt, 0.0f);
 }
 
 /*

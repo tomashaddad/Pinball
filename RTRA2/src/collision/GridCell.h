@@ -6,6 +6,7 @@
 
 #include "Camera.h"
 #include "api/Shader.h"
+#include "objects/Object.h"
 
 class GridCell {
 public:
@@ -19,4 +20,7 @@ private:
     unsigned int m_IBO;
     std::vector<glm::vec3> m_vertices;
     static std::vector<glm::uvec2> m_indices;
+
+    // The objects which sit within this cell's boundaries
+    std::vector<std::shared_ptr<Object>> m_objects;
 };

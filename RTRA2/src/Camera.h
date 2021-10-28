@@ -16,14 +16,16 @@ class Camera {
 public:
     Camera(std::shared_ptr<SDLManager> sdlManager);
 
-    void moveForward(const float dt);
-    void moveBackward(const float dt);
-    void strafeLeft(const float dt);
-    void strafeRight(const float dt);
+    void moveForward(float dt);
+    void moveBackward(float dt);
+    void strafeLeft(float dt);
+    void strafeRight(float dt);
     void yaw(signed int degree);
     void pitch(signed int degree);
-    void rollLeft(const float dt);
-    void rollRight(const float dt);
+    void rollLeft(float dt);
+    void rollRight(float dt);
+    void rise(float dt);
+    void fall(float dt);
     glm::quat lookAt(glm::vec3 targetPosition);
 
     void reset();

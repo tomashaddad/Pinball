@@ -13,8 +13,7 @@ RTRApp::RTRApp(const std::string& title, unsigned int width, unsigned int height
     , m_lightManager(std::make_shared<LightManager>(m_camera))
     , m_pinballScene(std::make_shared<PinballScene>(m_camera, m_lightManager))
     , m_fpsTimer(std::make_shared<FPSTimer>(m_sdlManager))
-    , m_text(std::make_shared<Text>())
-    , m_uGrid2D(std::make_shared<UGrid2D>(17, 9, 0.5, m_camera)) {}
+    , m_text(std::make_shared<Text>()) {}
 
 void RTRApp::run() {
     while (m_state != State::QUIT) {
@@ -22,6 +21,7 @@ void RTRApp::run() {
 
         float dt = m_sdlManager->getFrameDeltaTime();
         checkInput(dt);
+        update(dt);
         renderFrame(dt);
 
         m_sdlManager->swapBuffers();
@@ -80,12 +80,21 @@ void RTRApp::checkInput(float dt) {
     if (keystates[SDL_SCANCODE_E]) {
         m_camera->rollRight(dt);
     }
+
+    if (keystates[SDL_SCANCODE_SPACE]) {
+        m_camera->rise(dt);
+    }
+
+    if (keystates[SDL_SCANCODE_LCTRL]) {
+        m_camera->fall(dt);
+    }
 }
+
+void RTRApp::update(float dt) { m_pinballScene->update(dt); }
 
 void RTRApp::renderFrame(float dt) {
     m_text->render();
     m_pinballScene->render();
-    m_uGrid2D->draw();
 }
 
 void RTRApp::quit() {

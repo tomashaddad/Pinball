@@ -8,7 +8,6 @@
 #include "GLManager.h"
 #include "LightManager.h"
 #include "SDLManager.h"
-#include "collision/UGrid2D.h"
 #include "scene/PinballScene.h"
 #include "utility/FPSTimer.h"
 #include "utility/Text.h"
@@ -27,6 +26,7 @@ public:
     void run();
 
     void checkInput(float dt);
+    void update(float dt);
     void renderFrame(float dt);
     void quit();
 
@@ -40,5 +40,4 @@ private:
     std::shared_ptr<PinballScene> m_pinballScene;  // depends on LightManager, Camera
     std::shared_ptr<FPSTimer> m_fpsTimer;          // depends on SDLManager
     std::shared_ptr<Text> m_text;
-    std::shared_ptr<UGrid2D> m_uGrid2D;
 };

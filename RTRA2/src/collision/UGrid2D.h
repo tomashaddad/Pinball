@@ -20,14 +20,9 @@ private:
     std::shared_ptr<Camera> m_camera;
     Transformation m_transform;
 
-    std::vector<GridCell> m_gridCells;
-    std::vector<glm::vec3> m_vertices;
+    std::vector<std::vector<std::shared_ptr<GridCell>>> m_gridCells;
+    std::vector<std::vector<glm::vec3>> m_vertices;
 
-    unsigned int m_VAO;
-    unsigned int m_VBO;
-    unsigned int m_IBO;
-
-    unsigned int m_length;
     unsigned int m_rows;
     unsigned int m_columns;
     float m_cellLength;

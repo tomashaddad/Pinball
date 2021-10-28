@@ -15,8 +15,15 @@ PinballScene::PinballScene(std::shared_ptr<Camera> camera,
                            std::shared_ptr<LightManager> lightManager)
     : m_camera(camera)
     , m_skybox(camera)
-    , m_lightManager(lightManager) {
+    , m_lightManager(lightManager)
+    , m_uGrid2D(std::make_shared<UGrid2D>(17, 9, 0.5, camera)) {
     m_objects.push_back(std::make_shared<Backboard>());
+}
+
+void PinballScene::update(float dt) {
+    for (auto& object : m_objects) {
+        object->updateCellMembership(m_uGrid2D);
+    }
 }
 
 void PinballScene::render() {
@@ -25,5 +32,8 @@ void PinballScene::render() {
         object->drawBoundingBox(m_camera);
     }
 
+    m_uGrid2D->draw();
+
+    // draw last
     m_skybox.draw();
 }

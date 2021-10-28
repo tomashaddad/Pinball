@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "Camera.h"
 #include "LightManager.h"
@@ -10,6 +11,9 @@
 #include "collision/Collider.h"
 #include "model/BoundingBox.h"
 #include "model/Model.h"
+
+class GridCell;
+class UGrid2D;
 
 enum class ObjectShape { RECTANGULAR, TRIANGULAR, SPHERICAL, CYLINDRICAL };
 
@@ -20,9 +24,12 @@ public:
     virtual void draw(std::shared_ptr<Camera> camera,
                       std::shared_ptr<LightManager> lightManager) = 0;
 
+    void updateCellMembership(std::shared_ptr<UGrid2D> grid);
     void drawBoundingBox(std::shared_ptr<Camera> camera);
 
 protected:
+    std::vector<std::shared_ptr<GridCell>> m_cellMemberships;
+
     Transformation m_transformation;
     Model m_model;
     Collider m_collider;
