@@ -16,6 +16,9 @@ public:
     void draw(std::shared_ptr<Camera> camera);
     void recalculateBoundingBox();
 
+    glm::vec3 getMin();
+    glm::vec3 getMax();
+
 private:
     std::shared_ptr<Shader> m_bbShader;
 

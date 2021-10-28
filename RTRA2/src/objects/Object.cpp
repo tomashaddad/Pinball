@@ -12,6 +12,13 @@ Object::Object(std::string modelPath, std::shared_ptr<Shader> shader)
     , m_shader(shader)
     , m_boundingBox(m_model) {}
 
-void Object::updateCellMembership(std::shared_ptr<UGrid2D> grid) {}
+void Object::update(float dt) {
+    // m_transformation.m_rotation = glm::angleAxis(glm::radians(.1f), glm::vec3(1.0f, 0.0f, 0.0f))
+    // *
+    //                              m_transformation.m_rotation;
+    m_boundingBox.update(m_transformation);
+}
 
 void Object::drawBoundingBox(std::shared_ptr<Camera> camera) { m_boundingBox.draw(camera); }
+
+BoundingBox Object::getBoundingBox() { return m_boundingBox; }

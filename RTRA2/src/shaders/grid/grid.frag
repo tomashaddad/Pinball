@@ -2,6 +2,8 @@
 
 out vec4 fragment;
 
+uniform vec3 colour;
+
 void main() {
-	fragment = vec4(1.0);
+	fragment = vec4(colour, 1.0);
 }

@@ -3,6 +3,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "objects/Object.h"
+
 UGrid2D::UGrid2D(unsigned int rows, unsigned int columns, float cellLength,
                  std::shared_ptr<Camera> camera)
     : m_gridShader(
@@ -39,6 +41,47 @@ UGrid2D::UGrid2D(unsigned int rows, unsigned int columns, float cellLength,
     }
 }
 
+std::vector<std::shared_ptr<GridCell>> UGrid2D::getCellsWithObject(std::shared_ptr<Object> object) {
+    glm::vec3 bbMin = object->getBoundingBox().getMin();
+    glm::vec3 bbMax = object->getBoundingBox().getMax();
+
+    int startX = glm::floor(bbMin.x / m_cellLength + (float)m_columns / 2.0f);
+    int endX = glm::ceil(bbMax.x / m_cellLength + (float)m_columns / 2.0f);
+
+    int startZ = glm::floor(bbMin.z / m_cellLength + (float)m_rows / 2.0f);
+    int endZ = glm::ceil(bbMax.z / m_cellLength + (float)m_rows / 2.0f);
+
+    // Objects outside the bounds of the defined grid can be ignored
+    startX = startX < 0 ? 0 : startX;
+    startZ = startZ < 0 ? 0 : startZ;
+    endX = endX < m_columns ? endX : m_columns;
+    endZ = endZ < m_rows ? endZ : m_rows;
+
+    std::vector<std::shared_ptr<GridCell>> cells;
+    for (int z = startZ; z < endZ; ++z) {
+        std::vector<std::shared_ptr<GridCell>> row = m_gridCells[z];
+        for (int x = startX; x < endX; ++x) {
+            cells.push_back(row[x]);
+        }
+    }
+    return cells;
+}
+
+void UGrid2D::clearCellsOfObject(std::shared_ptr<Object> object) {
+    for (auto& row : m_gridCells) {
+        for (auto& cell : row) {
+            cell->remove(object);
+        }
+    }
+}
+
+void UGrid2D::updateObjectMembership(std::shared_ptr<Object> object) {
+    std::vector<std::shared_ptr<GridCell>> memberCells = getCellsWithObject(object);
+    for (auto& cell : memberCells) {
+        cell->add(object);
+    }
+}
+
 void UGrid2D::draw() {
     for (auto& row : m_gridCells) {
         for (auto& cell : row) {
@@ -46,3 +89,11 @@ void UGrid2D::draw() {
         }
     }
 }
+
+std::vector<std::vector<std::shared_ptr<GridCell>>> UGrid2D::getCells() { return m_gridCells; }
+
+unsigned int UGrid2D::getNumRows() { return m_rows; }
+
+unsigned int UGrid2D::getNumCols() { return m_columns; }
+
+float UGrid2D::getCellLength() { return m_cellLength; }

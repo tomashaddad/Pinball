@@ -177,6 +177,10 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\objects\SideBit.cpp" />
+    <ClCompile Include="src\objects\TopWall.cpp" />
+    <ClCompile Include="src\objects\RightWall.cpp" />
+    <ClCompile Include="src\objects\LeftWall.cpp" />
     <ClCompile Include="src\collision\GridCell.cpp" />
     <ClCompile Include="src\model\BoundingBox.cpp" />
     <ClCompile Include="src\objects\Object.cpp" />
@@ -187,6 +191,7 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClCompile Include="src\model\Model.cpp" />
     <ClCompile Include="src\model\Mesh.cpp" />
     <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\objects\BottomWall.cpp" />
     <ClCompile Include="src\utility\FPSTimer.cpp" />
     <ClCompile Include="src\LightManager.cpp" />
     <ClCompile Include="src\scene\PinballScene.cpp" />
@@ -203,6 +208,10 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClCompile Include="src\collision\UGrid2D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\objects\SideBit.h" />
+    <ClInclude Include="src\objects\TopWall.h" />
+    <ClInclude Include="src\objects\RightWall.h" />
+    <ClInclude Include="src\objects\LeftWall.h" />
     <ClInclude Include="src\collision\GridCell.h" />
     <ClInclude Include="src\model\BoundingBox.h" />
     <ClInclude Include="src\objects\Object.h" />
@@ -215,6 +224,7 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClInclude Include="src\model\Mesh.h" />
     <ClInclude Include="src\LightManager.h" />
     <ClInclude Include="src\Camera.h" />
+    <ClInclude Include="src\objects\BottomWall.h" />
     <ClInclude Include="src\utility\FPSTimer.h" />
     <ClInclude Include="src\scene\PinballScene.h" />
     <ClInclude Include="src\api\Shader.h" />

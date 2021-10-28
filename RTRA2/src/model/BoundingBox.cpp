@@ -4,6 +4,7 @@
 #include <glm/gtc/type_ptr.hpp>
 #include <glm/gtx/string_cast.hpp>
 #include <iostream>
+#include <limits>
 
 BoundingBox::BoundingBox(const Model& model)
     : m_bbShader(
@@ -23,38 +24,19 @@ BoundingBox::BoundingBox(const Model& model)
         m_max.z = std::max(mesh.m_max.z, m_max.z);
     }
 
-    double hW = (m_max.x - m_min.x) / 2.0f;
-    double hH = (m_max.y - m_min.y) / 2.0f;
-    double hD = (m_max.z - m_min.z) / 2.0f;
-
     // clang-format off
-    
-    // not intuitive to me but keeping for prosperity
-
-    //m_vertices.insert(m_vertices.end(), {
-    //    // front
-    //    {m_min.x, m_min.y, m_max.z},
-    //    {m_max.x, m_min.y, m_max.z},
-    //    {m_max.x, m_max.y, m_max.z},
-    //    {m_min.x, m_max.y, m_max.z},
-    //    // back
-    //    {m_min.x, m_min.y, m_min.z},
-    //    {m_max.x, m_min.y, m_min.z},
-    //    {m_max.x, m_max.y, m_min.z},
-    //    {m_min.x, m_max.y, m_min.z}
-    //});
 
     m_vertices.insert(m_vertices.end(), {
         // front
-        {-hW, -hH, hD},
-        {hW, -hH, hD},
-        {hW, hH, hD},
-        {-hW, hH, hD},
+        {m_min.x, m_min.y, m_max.z},
+        {m_max.x, m_min.y, m_max.z},
+        {m_max.x, m_max.y, m_max.z},
+        {m_min.x, m_max.y, m_max.z},
         // back
-        {-hW, -hH, -hD},
-        {hW, -hH, -hD},
-        {hW, hH, -hD},
-        {-hW, hH, -hD},
+        {m_min.x, m_min.y, m_min.z},
+        {m_max.x, m_min.y, m_min.z},
+        {m_max.x, m_max.y, m_min.z},
+        {m_min.x, m_max.y, m_min.z}
     });
 
     m_originalVertices = m_vertices;
@@ -106,8 +88,8 @@ void BoundingBox::update(const Transformation& transform) {
 }
 
 void BoundingBox::recalculateBoundingBox() {
-    m_min = glm::vec3(0.0f);
-    m_max = glm::vec3(0.0f);
+    m_min = std::numeric_limits<float>::max() * glm::vec3(1.0f);
+    m_max = std::numeric_limits<float>::max() * glm::vec3(-1.0f);
 
     for (auto& value : m_vertices) {
         m_min.x = std::min(value.x, m_min.x);
@@ -123,25 +105,28 @@ void BoundingBox::recalculateBoundingBox() {
     double hD = (m_max.z - m_min.z) / 2.0f;
 
     m_vertices.clear();
+
     // clang-format off
+
     m_vertices.insert(m_vertices.end(), {
         // front
-        {-hW, -hH, hD},
-        {hW, -hH, hD},
-        {hW, hH, hD},
-        {-hW, hH, hD},
+        {m_min.x, m_min.y, m_max.z},
+        {m_max.x, m_min.y, m_max.z},
+        {m_max.x, m_max.y, m_max.z},
+        {m_min.x, m_max.y, m_max.z},
         // back
-        {-hW, -hH, -hD},
-        {hW, -hH, -hD},
-        {hW, hH, -hD},
-        {-hW, hH, -hD},
+        {m_min.x, m_min.y, m_min.z},
+        {m_max.x, m_min.y, m_min.z},
+        {m_max.x, m_max.y, m_min.z},
+        {m_min.x, m_max.y, m_min.z}
     });
+
     // clang-format on
 }
 
 void BoundingBox::draw(std::shared_ptr<Camera> camera) {
     m_bbShader->bind();
-    m_bbShader->setMat4("model", m_transform.getModelMatrix());
+    m_bbShader->setMat4("model", glm::mat4(1.0f));
     m_bbShader->setMat4("view", camera->getViewMatrix());
     m_bbShader->setMat4("projection", camera->getProjectionMatrix());
 
@@ -155,3 +140,7 @@ void BoundingBox::draw(std::shared_ptr<Camera> camera) {
     glEnable(GL_CULL_FACE);
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 }
+
+glm::vec3 BoundingBox::getMin() { return m_min; }
+
+glm::vec3 BoundingBox::getMax() { return m_max; }

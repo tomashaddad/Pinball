@@ -1,16 +1,17 @@
-#include "Backboard.h"
+#include "RightWall.h"
 
 #include "collision/Rectangular.h"
 
-Backboard::Backboard()
-    : Object("./src/assets/PinballTable3/Backboard.fbx",
+RightWall::RightWall()
+    : Object("./src/assets/PinballTable3/Frame_Right.fbx",
              std::make_shared<Shader>("./src/shaders/pinball/basic.vert",
                                       "./src/shaders/pinball/basic.frag")) {
     m_collider = Rectangular(m_model);
     m_transformation.m_scale = {10.0f, 10.0f, 10.0f};
+    m_transformation.m_translation = {-2.075f, 0.125f, 0.0f};
 }
 
-void Backboard::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> lightManager) {
+void RightWall::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> lightManager) {
     glm::mat4 model = m_transformation.getModelMatrix();
     glm::mat4 view = camera->getViewMatrix();
     glm::mat4 projection = camera->getProjectionMatrix();

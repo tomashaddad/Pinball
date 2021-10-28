@@ -12,6 +12,9 @@ class GridCell {
 public:
     GridCell(glm::vec3 topLeft, glm::vec3 topRight, glm::vec3 bottomRight, glm::vec3 bottomLeft);
     void draw(std::shared_ptr<Camera> camera);
+    void add(std::shared_ptr<Object> object);
+    bool has(std::shared_ptr<Object> object);
+    void remove(std::shared_ptr<Object> object);
 
 private:
     std::shared_ptr<Shader> m_gridShader;

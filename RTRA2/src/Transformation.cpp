@@ -9,8 +9,9 @@ Transformation::Transformation()
     , m_rotation(glm::quat(1.0f, 0.0f, 0.0f, 0.0f)) {}
 
 const glm::mat4 Transformation::getModelMatrix() const {
-    glm::mat4 transformation = glm::translate(glm::mat4(1.0f), m_translation);  // translate
-    transformation = glm::toMat4(m_rotation) * transformation;                  // rotate
-    transformation = glm::scale(transformation, m_scale);                       // scale
+    glm::mat4 transformation = glm::mat4(1.0f);
+    transformation = glm::translate(transformation, m_translation);  // translate
+    transformation = glm::toMat4(m_rotation) * transformation;       // rotate
+    transformation = glm::scale(transformation, m_scale);            // scale
     return transformation;
 }

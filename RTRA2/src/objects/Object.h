@@ -24,8 +24,10 @@ public:
     virtual void draw(std::shared_ptr<Camera> camera,
                       std::shared_ptr<LightManager> lightManager) = 0;
 
-    void updateCellMembership(std::shared_ptr<UGrid2D> grid);
+    void update(float dt);
+
     void drawBoundingBox(std::shared_ptr<Camera> camera);
+    BoundingBox getBoundingBox();
 
 protected:
     std::vector<std::shared_ptr<GridCell>> m_cellMemberships;

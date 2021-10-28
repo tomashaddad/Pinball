@@ -2,6 +2,7 @@
 
 #include <glad/glad.h>
 
+#include <algorithm>
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <iostream>
@@ -37,11 +38,33 @@ GridCell::GridCell(glm::vec3 topLeft, glm::vec3 topRight, glm::vec3 bottomRight,
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void GridCell::add(std::shared_ptr<Object> object) {
+    if (!has(object)) {
+        m_objects.push_back(object);
+    }
+}
+
+bool GridCell::has(std::shared_ptr<Object> object) {
+    return std::find(m_objects.begin(), m_objects.end(), object) != m_objects.end();
+}
+
+void GridCell::remove(std::shared_ptr<Object> object) {
+    m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), object), m_objects.end());
+}
+
 void GridCell::draw(std::shared_ptr<Camera> camera) {
     m_gridShader->bind();
     m_gridShader->setMat4("model", glm::mat4(1.0f));  // not using a transform
     m_gridShader->setMat4("view", camera->getViewMatrix());
     m_gridShader->setMat4("projection", camera->getProjectionMatrix());
+
+    if (m_objects.size() == 1) {
+        m_gridShader->setVec3f("colour", glm::vec3(0.0f, 1.0f, 0.0f));
+    } else if (m_objects.size() == 0) {
+        m_gridShader->setVec3f("colour", glm::vec3(1.0f, 1.0f, 1.0f));
+    } else {
+        m_gridShader->setVec3f("colour", glm::vec3(1.0f, 0.0f, 0.0f));
+    }
 
     glBindVertexArray(m_VAO);
     glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, NULL);

@@ -12,7 +12,8 @@ Camera::Camera(std::shared_ptr<SDLManager> sdlManager)
     , m_far(100.0f)
 
     // start above and in front of the board, look at the centre
-    , m_startingPosition({0.0f, 8.0f, 8.0f})
+    //, m_startingPosition({0.0f, 8.0f, 8.0f})
+    , m_startingPosition({0.0f, 8.0f, 0.2f})
     , m_currentPosition(m_startingPosition)
     , m_rotation({1.0f, 0.0f, 0.0f, 0.0f})
 
