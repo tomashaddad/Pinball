@@ -16,6 +16,8 @@ public:
     bool has(std::shared_ptr<Object> object);
     void remove(std::shared_ptr<Object> object);
 
+    std::vector<std::shared_ptr<Object>> getMemberObjects();
+
 private:
     std::shared_ptr<Shader> m_gridShader;
     unsigned int m_VAO;

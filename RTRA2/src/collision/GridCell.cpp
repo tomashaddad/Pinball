@@ -70,3 +70,5 @@ void GridCell::draw(std::shared_ptr<Camera> camera) {
     glDrawElements(GL_LINES, 8, GL_UNSIGNED_INT, NULL);
     glBindVertexArray(0);
 }
+
+std::vector<std::shared_ptr<Object>> GridCell::getMemberObjects() { return m_objects; }

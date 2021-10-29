@@ -68,10 +68,10 @@ std::vector<std::shared_ptr<GridCell>> UGrid2D::getCellsWithObject(std::shared_p
 }
 
 void UGrid2D::clearCellsOfObject(std::shared_ptr<Object> object) {
-    for (auto& row : m_gridCells) {
-        for (auto& cell : row) {
-            cell->remove(object);
-        }
+    std::vector<std::shared_ptr<GridCell>> memberCells = getCellsWithObject(object);
+    for (auto& cell : memberCells) {
+        cell->remove(object);
+        object->remove(cell);
     }
 }
 
@@ -79,6 +79,7 @@ void UGrid2D::updateObjectMembership(std::shared_ptr<Object> object) {
     std::vector<std::shared_ptr<GridCell>> memberCells = getCellsWithObject(object);
     for (auto& cell : memberCells) {
         cell->add(object);
+        object->add(cell);
     }
 }
 
