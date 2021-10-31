@@ -5,7 +5,7 @@
 #include <glm/glm.hpp>
 #include <string>
 
-#include "LightManager.h"
+#include "lights/LightManager.h"
 #include "model/Material.h"
 
 class Shader {
@@ -34,7 +34,7 @@ public:
 
     void setMaterial(const std::string& materialName, const Material& material);
     void setDirectionalLight(const std::string lightName, const DirectionalLight light);
-    void setPointLight(const std::string lightName, const PointLight light, int index);
+    void setPointLight(const std::string lightName, const PointLight light, int index = 0);
 
 private:
     std::string parseFile(const std::string& file);

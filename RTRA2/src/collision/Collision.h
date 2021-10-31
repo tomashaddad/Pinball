@@ -5,7 +5,7 @@ class Object;
 class Ball;
 class Backboard;
 
-#include "model/BoundingBox.h"
+#include "objects/BoundingBox.h"
 
 namespace collision {
 bool collide(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2);

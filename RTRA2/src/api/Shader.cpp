@@ -5,6 +5,8 @@
 #include <iostream>
 #include <vector>
 
+#include "lights/PointLight.h"
+
 Shader::Shader(const std::string& vertexShader, const std::string& fragmentShader,
                const std::string& geometryShader, const bool& fromFile)
     : m_programID(0)
@@ -128,7 +130,7 @@ GLint Shader::getUniformLocation(const std::string& uniformName) {
     GLint location = glGetUniformLocation(m_programID, uniformName.c_str());
 
     if (location == -1) {
-        std::cerr << uniformName << " could not be found" << std::endl;
+        // std::cerr << uniformName << " could not be found" << std::endl;
     }
 
     return location;

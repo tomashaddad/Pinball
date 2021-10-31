@@ -177,23 +177,26 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\objects\SideBit.cpp" />
-    <ClCompile Include="src\objects\TopWall.cpp" />
-    <ClCompile Include="src\objects\RightWall.cpp" />
-    <ClCompile Include="src\objects\LeftWall.cpp" />
+    <ClCompile Include="src\lights\DirectionalLight.cpp" />
+    <ClCompile Include="src\lights\PointLight.cpp" />
+    <ClCompile Include="src\objects\table\BottomWall.cpp" />
+    <ClCompile Include="src\objects\table\RightWall.cpp" />
+    <ClCompile Include="src\objects\table\TopWall.cpp" />
+    <ClCompile Include="src\scene\BloomRenderer.cpp" />
+    <ClCompile Include="src\collision\collision.cpp" />
+    <ClCompile Include="src\objects\table\Ball.cpp" />
     <ClCompile Include="src\collision\GridCell.cpp" />
-    <ClCompile Include="src\model\BoundingBox.cpp" />
+    <ClCompile Include="src\objects\BoundingBox.cpp" />
+    <ClCompile Include="src\objects\table\LeftWall.cpp" />
     <ClCompile Include="src\objects\Object.cpp" />
-    <ClCompile Include="src\objects\Backboard.cpp" />
-    <ClCompile Include="src\collision\Collider.cpp" />
-    <ClCompile Include="src\collision\Rectangular.cpp" />
-    <ClCompile Include="src\Skybox.cpp" />
+    <ClCompile Include="src\objects\table\Backboard.cpp" />
+    <ClCompile Include="src\objects\table\Wall.cpp" />
+    <ClCompile Include="src\scene\Skybox.cpp" />
     <ClCompile Include="src\model\Model.cpp" />
     <ClCompile Include="src\model\Mesh.cpp" />
     <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\objects\BottomWall.cpp" />
     <ClCompile Include="src\utility\FPSTimer.cpp" />
-    <ClCompile Include="src\LightManager.cpp" />
+    <ClCompile Include="src\lights\LightManager.cpp" />
     <ClCompile Include="src\scene\PinballScene.cpp" />
     <ClCompile Include="src\api\Shader.cpp" />
     <ClCompile Include="src\exceptions\GLException.cpp" />
@@ -204,27 +207,31 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClCompile Include="src\dependencies\glm\detail\glm.cpp" />
     <ClCompile Include="src\SDLManager.cpp" />
     <ClCompile Include="src\utility\Text.cpp" />
-    <ClCompile Include="src\Transformation.cpp" />
+    <ClCompile Include="src\objects\Transformation.cpp" />
     <ClCompile Include="src\collision\UGrid2D.cpp" />
+    <ClCompile Include="src\collision\Physics.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\objects\SideBit.h" />
-    <ClInclude Include="src\objects\TopWall.h" />
-    <ClInclude Include="src\objects\RightWall.h" />
-    <ClInclude Include="src\objects\LeftWall.h" />
+    <ClInclude Include="src\lights\DirectionalLight.h" />
+    <ClInclude Include="src\lights\PointLight.h" />
+    <ClInclude Include="src\objects\table\BottomWall.h" />
+    <ClInclude Include="src\objects\table\RightWall.h" />
+    <ClInclude Include="src\objects\table\TopWall.h" />
+    <ClInclude Include="src\scene\BloomRenderer.h" />
+    <ClInclude Include="src\collision\collision.h" />
+    <ClInclude Include="src\objects\table\Ball.h" />
     <ClInclude Include="src\collision\GridCell.h" />
-    <ClInclude Include="src\model\BoundingBox.h" />
+    <ClInclude Include="src\objects\BoundingBox.h" />
+    <ClInclude Include="src\objects\table\LeftWall.h" />
     <ClInclude Include="src\objects\Object.h" />
-    <ClInclude Include="src\objects\Backboard.h" />
-    <ClInclude Include="src\collision\Collider.h" />
-    <ClInclude Include="src\collision\Rectangular.h" />
-    <ClInclude Include="src\Skybox.h" />
+    <ClInclude Include="src\objects\table\Backboard.h" />
+    <ClInclude Include="src\objects\table\Wall.h" />
+    <ClInclude Include="src\scene\Skybox.h" />
     <ClInclude Include="src\model\Material.h" />
     <ClInclude Include="src\model\Model.h" />
     <ClInclude Include="src\model\Mesh.h" />
-    <ClInclude Include="src\LightManager.h" />
+    <ClInclude Include="src\lights\LightManager.h" />
     <ClInclude Include="src\Camera.h" />
-    <ClInclude Include="src\objects\BottomWall.h" />
     <ClInclude Include="src\utility\FPSTimer.h" />
     <ClInclude Include="src\scene\PinballScene.h" />
     <ClInclude Include="src\api\Shader.h" />
@@ -519,8 +526,9 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <ClInclude Include="src\utility\Text.h" />
     <ClInclude Include="src\model\Texture.h" />
     <ClInclude Include="src\model\Vertex.h" />
-    <ClInclude Include="src\Transformation.h" />
+    <ClInclude Include="src\objects\Transformation.h" />
     <ClInclude Include="src\collision\UGrid2D.h" />
+    <ClInclude Include="src\collision\Physics.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\dependencies\glm\detail\func_common.inl" />
@@ -659,10 +667,20 @@ xcopy /y /d "$(SolutionDir)\dependencies\lib\assimp\assimp-vc142-mtd.dll" "$(Out
     <None Include="src\dependencies\glm\gtx\vector_angle.inl" />
     <None Include="src\dependencies\glm\gtx\vector_query.inl" />
     <None Include="src\dependencies\glm\gtx\wrap.inl" />
+    <None Include="src\shaders\ball\ball.frag" />
+    <None Include="src\shaders\ball\ball.vert" />
     <None Include="src\shaders\bbox\bbox.frag" />
     <None Include="src\shaders\bbox\bbox.vert" />
+    <None Include="src\shaders\framebuffer\blur.frag" />
+    <None Include="src\shaders\framebuffer\blur.vert" />
+    <None Include="src\shaders\framebuffer\combine.frag" />
+    <None Include="src\shaders\framebuffer\combine.vert" />
+    <None Include="src\shaders\frame\frame.frag" />
+    <None Include="src\shaders\frame\frame.vert" />
     <None Include="src\shaders\grid\grid.frag" />
     <None Include="src\shaders\grid\grid.vert" />
+    <None Include="src\shaders\light\light.frag" />
+    <None Include="src\shaders\light\light.vert" />
     <None Include="src\shaders\pinball\basic.frag" />
     <None Include="src\shaders\pinball\basic.vert" />
     <None Include="src\shaders\skybox\skybox.frag" />

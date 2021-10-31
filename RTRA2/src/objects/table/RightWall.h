@@ -1,15 +1,15 @@
 #pragma once
 
-#include "Camera.h"
-#include "LightManager.h"
-#include "Object.h"
 #include "Wall.h"
+#include "model/Model.h"
+#include "objects/Transformation.h"
 
+class Camera;
+class LightManager;
 class Skybox;
 
 class RightWall : public Wall {
 public:
-    RightWall(std::shared_ptr<Skybox> skybox);
-    virtual void draw(std::shared_ptr<Camera> camera,
-                      std::shared_ptr<LightManager> lightManager) override;
+    RightWall(Model model, std::shared_ptr<Shader> shader, Transformation transformation,
+              ObjectType objectType, std::shared_ptr<Skybox> skybox);
 };

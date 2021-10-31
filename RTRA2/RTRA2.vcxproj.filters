@@ -51,10 +51,10 @@
     <ClCompile Include="src\utility\FPSTimer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Transformation.cpp">
+    <ClCompile Include="src\objects\Transformation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\LightManager.cpp">
+    <ClCompile Include="src\lights\LightManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\model\Mesh.cpp">
@@ -63,22 +63,16 @@
     <ClCompile Include="src\model\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Skybox.cpp">
+    <ClCompile Include="src\scene\Skybox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\collision\Collider.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\collision\Rectangular.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\objects\Backboard.cpp">
+    <ClCompile Include="src\objects\table\Backboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\objects\Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\model\BoundingBox.cpp">
+    <ClCompile Include="src\objects\BoundingBox.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\collision\UGrid2D.cpp">
@@ -87,19 +81,37 @@
     <ClCompile Include="src\collision\GridCell.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\LeftWall.cpp">
+    <ClCompile Include="src\objects\table\Ball.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\RightWall.cpp">
+    <ClCompile Include="src\collision\Physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\TopWall.cpp">
+    <ClCompile Include="src\collision\collision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\BottomWall.cpp">
+    <ClCompile Include="src\objects\table\LeftWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\objects\SideBit.cpp">
+    <ClCompile Include="src\objects\table\Wall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene\BloomRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lights\PointLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\lights\DirectionalLight.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\table\RightWall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\table\TopWall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\objects\table\BottomWall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -983,10 +995,10 @@
     <ClInclude Include="src\utility\FPSTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Transformation.h">
+    <ClInclude Include="src\objects\Transformation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\LightManager.h">
+    <ClInclude Include="src\lights\LightManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\model\Mesh.h">
@@ -1004,22 +1016,16 @@
     <ClInclude Include="src\model\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Skybox.h">
+    <ClInclude Include="src\scene\Skybox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\collision\Collider.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\collision\Rectangular.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\objects\Backboard.h">
+    <ClInclude Include="src\objects\table\Backboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\objects\Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\model\BoundingBox.h">
+    <ClInclude Include="src\objects\BoundingBox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\collision\UGrid2D.h">
@@ -1028,19 +1034,37 @@
     <ClInclude Include="src\collision\GridCell.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\LeftWall.h">
+    <ClInclude Include="src\objects\table\Ball.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\RightWall.h">
+    <ClInclude Include="src\collision\Physics.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\TopWall.h">
+    <ClInclude Include="src\collision\collision.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\BottomWall.h">
+    <ClInclude Include="src\objects\table\LeftWall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\objects\SideBit.h">
+    <ClInclude Include="src\objects\table\Wall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scene\BloomRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lights\PointLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\lights\DirectionalLight.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\table\RightWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\table\TopWall.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\objects\table\BottomWall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1461,5 +1485,15 @@
     <None Include="src\shaders\grid\grid.frag" />
     <None Include="src\shaders\bbox\bbox.vert" />
     <None Include="src\shaders\bbox\bbox.frag" />
+    <None Include="src\shaders\frame\frame.vert" />
+    <None Include="src\shaders\frame\frame.frag" />
+    <None Include="src\shaders\ball\ball.vert" />
+    <None Include="src\shaders\ball\ball.frag" />
+    <None Include="src\shaders\framebuffer\blur.vert" />
+    <None Include="src\shaders\framebuffer\blur.frag" />
+    <None Include="src\shaders\framebuffer\combine.vert" />
+    <None Include="src\shaders\framebuffer\combine.frag" />
+    <None Include="src\shaders\light\light.frag" />
+    <None Include="src\shaders\light\light.vert" />
   </ItemGroup>
 </Project>

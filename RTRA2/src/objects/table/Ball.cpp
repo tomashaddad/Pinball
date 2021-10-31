@@ -10,7 +10,6 @@ Ball::Ball(Model model, std::shared_ptr<Shader> shader, Transformation transform
     , m_skybox(skybox)
     , m_velocity(glm::vec3(0.0, 0.0f, 0.0f))
     , m_acceleration(glm::vec3(0.0f)) {
-    m_boundingBox.update(m_transformation);
     m_radius = (m_boundingBox.getMax().x - m_boundingBox.getMin().x) / 2.0f;
 }
 
@@ -44,7 +43,7 @@ void Ball::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> li
 
 void Ball::bounce(double scalar) {
     m_velocity.y *= -scalar;
-    m_transformation.m_translation.y += 0.01;
+    m_transformation.m_translation.y += 0.02;
 }
 
 double Ball::getRadius() { return m_radius; }

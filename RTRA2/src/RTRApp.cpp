@@ -2,24 +2,29 @@
 
 #include <iostream>
 
+#include "collision/Physics.h"
 #include "scene/PinballScene.h"
 #include "utility/FPSTimer.h"
 
 RTRApp::RTRApp(const std::string& title, unsigned int width, unsigned int height, bool fullscreen)
     : m_state(State::GOOD)
+    , m_frameByFrame(true)
+    , m_step(false)
     , m_sdlManager(std::make_shared<SDLManager>(title, width, height, fullscreen))
     , m_glManager(std::make_shared<GLManager>())
+    , m_physics(std::make_shared<Physics>())
     , m_camera(std::make_shared<Camera>(m_sdlManager))
     , m_lightManager(std::make_shared<LightManager>(m_camera))
-    , m_pinballScene(std::make_shared<PinballScene>(m_camera, m_lightManager))
-    , m_fpsTimer(std::make_shared<FPSTimer>(m_sdlManager))
-    , m_text(std::make_shared<Text>()) {}
+    , m_text(std::make_shared<Text>())
+    , m_pinballScene(std::make_shared<PinballScene>(m_camera, m_lightManager, m_physics, m_text))
+    , m_fpsTimer(std::make_shared<FPSTimer>(m_sdlManager)) {}
 
 void RTRApp::run() {
     while (m_state != State::QUIT) {
         m_fpsTimer->start();
 
         float dt = m_sdlManager->getFrameDeltaTime();
+
         checkInput(dt);
         update(dt);
         renderFrame(dt);
@@ -28,6 +33,7 @@ void RTRApp::run() {
         m_sdlManager->updateWindow();
 
         m_fpsTimer->end();
+        m_text->fps(m_fpsTimer->getAverageFPS());
     }
 }
 
@@ -43,6 +49,25 @@ void RTRApp::checkInput(float dt) {
                     case SDLK_r:
                         m_camera->reset();
                         break;
+                    case SDLK_RETURN:
+                        m_frameByFrame = !m_frameByFrame;
+                        m_text->setFrameByFrame(m_frameByFrame);
+                        break;
+                    case SDLK_EQUALS:
+                        m_step = !m_step;
+                        break;
+                    case SDLK_l: {
+                        bool lights = m_pinballScene->toggleLights();
+                        m_text->setLights(lights);
+                    } break;
+                    case SDLK_g: {
+                        bool grid = m_pinballScene->toggleGrid();
+                        m_text->setGrid(grid);
+                    } break;
+                    case SDLK_b: {
+                        bool boundingBoxes = m_pinballScene->toggleBoundingBoxes();
+                        m_text->setBoundingBoxes(boundingBoxes);
+                    } break;
                     case SDLK_ESCAPE:
                         m_state = State::QUIT;
                         break;
@@ -90,14 +115,17 @@ void RTRApp::checkInput(float dt) {
     }
 }
 
-void RTRApp::update(float dt) { m_pinballScene->update(dt); }
+void RTRApp::update(float dt) {
+    if (!m_frameByFrame || m_step) {
+        m_pinballScene->update(dt);
+        m_pinballScene->checkCollisions();
 
-void RTRApp::renderFrame(float dt) {
-    m_text->render();
-    m_pinballScene->render();
+        if (m_step) {
+            m_step = !m_step;
+        }
+    }
 }
 
-void RTRApp::quit() {
-    m_state = State::QUIT;
-    gltTerminate();
-}
+void RTRApp::renderFrame(float dt) { m_pinballScene->render(); }
+
+void RTRApp::quit() { m_state = State::QUIT; }

@@ -16,7 +16,7 @@ public:
          ObjectType objectType, std::shared_ptr<Skybox> skybox);
 
     virtual void draw(std::shared_ptr<Camera> camera,
-                      std::shared_ptr<LightManager> lightManager) = 0;
+                      std::shared_ptr<LightManager> lightManager) override;
 
 protected:
     std::shared_ptr<Skybox> m_skybox;

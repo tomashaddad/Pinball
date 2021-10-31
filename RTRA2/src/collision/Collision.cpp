@@ -5,17 +5,14 @@
 #include <string>
 #include <typeinfo>
 
-#include "objects/Backboard.h"
-#include "objects/Ball.h"
 #include "objects/Object.h"
+#include "objects/table/Backboard.h"
+#include "objects/table/Ball.h"
 
 bool collision::collide(std::shared_ptr<Object> obj1, std::shared_ptr<Object> obj2) {
     if (!boundingBoxesCollide(obj1, obj2)) {
-        std::cout << "Bounding boxes do not collide!" << std::endl;
         return false;
     }
-
-    std::cout << "Bounding boxes have collided!" << std::endl;
 
     std::string obj1Type = typeid(*obj1.get()).name();
     std::string obj2Type = typeid(*obj2.get()).name();
@@ -29,7 +26,6 @@ bool collision::collide(std::shared_ptr<Object> obj1, std::shared_ptr<Object> ob
         if (obj2Type == "class Backboard") {
             auto backboard = std::dynamic_pointer_cast<Backboard>(obj2);
             colliding = check(ball, backboard);
-            std::cout << colliding << std::endl;
             if (colliding) {
                 resolve(ball, backboard);
             }
@@ -65,12 +61,7 @@ bool collision::check(std::shared_ptr<Ball> ball, std::shared_ptr<Backboard> bac
 }
 
 void collision::resolve(std::shared_ptr<Ball> ball, std::shared_ptr<Backboard> backboard) {
-    std::cout << "Resolving!" << std::endl;
-    ball->bounce(1.0);
-
-    // while (boundingBoxesCollide(ball, backboard)) {
-    //    ball->update(dt);
-    //}
+    ball->bounce(1.0f);
 }
 
 bool collision::sphereBox(glm::vec3 spherePos, float sphereRadius, glm::vec3 boxMin,

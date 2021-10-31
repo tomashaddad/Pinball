@@ -11,14 +11,27 @@ public:
     Text();
     ~Text();
     void render() const;
-    void toggleFPSMode();
+    void toggleDraw();
+
+    void fps(float fps);
+
+    void setLights(bool lights);
+    void setGrid(bool grid);
+    void setBoundingBoxes(bool boundingBoxes);
+    void setFrameByFrame(bool frameByFrame);
 
 private:
     void update() const;
 
     GLTtext* m_text;
-    bool m_fpsMode;
+    float m_fps;
     float m_xpos;
     float m_ypos;
     float m_size;
+
+    bool m_lights;
+    bool m_grid;
+    bool m_boundingBoxes;
+    bool m_draw;
+    bool m_frameByFrame;
 };

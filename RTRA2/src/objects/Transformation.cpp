@@ -13,10 +13,10 @@ Transformation::Transformation(glm::vec3 scale, glm::quat rotation, glm::vec3 tr
     , m_rotation(rotation)
     , m_translation(translation) {}
 
-const glm::mat4 Transformation::getModelMatrix() const {
+glm::mat4 Transformation::getModelMatrix() const {
     glm::mat4 transformation = glm::mat4(1.0f);
     transformation = glm::translate(transformation, m_translation);  // translate
-    transformation = glm::toMat4(m_rotation) * transformation;       // rotate
+    transformation = transformation * glm::toMat4(m_rotation);       // rotate
     transformation = glm::scale(transformation, m_scale);            // scale
     return transformation;
 }

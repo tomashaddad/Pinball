@@ -6,11 +6,13 @@
 
 #include "Camera.h"
 #include "GLManager.h"
-#include "LightManager.h"
 #include "SDLManager.h"
+#include "lights/LightManager.h"
 #include "scene/PinballScene.h"
 #include "utility/FPSTimer.h"
 #include "utility/Text.h"
+
+class Physics;
 
 enum class State {
     GOOD,
@@ -32,12 +34,15 @@ public:
 
 private:
     State m_state;
+    bool m_frameByFrame;
+    bool m_step;
 
     std::shared_ptr<SDLManager> m_sdlManager;
     std::shared_ptr<GLManager> m_glManager;
-    std::shared_ptr<Camera> m_camera;              // depends on SDLManager
-    std::shared_ptr<LightManager> m_lightManager;  // depends on Camera
-    std::shared_ptr<PinballScene> m_pinballScene;  // depends on LightManager, Camera
-    std::shared_ptr<FPSTimer> m_fpsTimer;          // depends on SDLManager
+    std::shared_ptr<Physics> m_physics;
+    std::shared_ptr<Camera> m_camera;
+    std::shared_ptr<LightManager> m_lightManager;
     std::shared_ptr<Text> m_text;
+    std::shared_ptr<PinballScene> m_pinballScene;
+    std::shared_ptr<FPSTimer> m_fpsTimer;
 };

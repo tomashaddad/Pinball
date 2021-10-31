@@ -1,5 +1,7 @@
 #version 330 core
-out vec4 fragment;
+
+layout (location = 0) out vec4 FragColor;
+layout (location = 1) out vec4 BrightColor;
 
 in vData {
 	vec3 position;
@@ -45,7 +47,10 @@ void main() {
         result += calculatePointLight(pointLights[i], vertexOut.normal, vertexOut.position, viewDir);
     }
 
-	fragment = vec4(result, 1.0);
+	FragColor = vec4(result, 1.0);
+
+    // Write nothing to (black) blur buffer
+    BrightColor = vec4(0.0, 0.0, 0.0, 1.0);
 }
 
 vec3 calculateDirectionalLight(DirectionalLight light, vec3 normal, vec3 viewDir) {
