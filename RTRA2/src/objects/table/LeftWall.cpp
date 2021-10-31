@@ -1,14 +1,13 @@
 #include "LeftWall.h"
 
-#include "collision/Rectangular.h"
+#include "Camera.h"
+#include "lights/LightManager.h"
+#include "scene/Skybox.h"
 
-LeftWall::LeftWall()
-    : Object("./src/assets/PinballTable3/Frame_Left.fbx",
-             std::make_shared<Shader>("./src/shaders/pinball/basic.vert",
-                                      "./src/shaders/pinball/basic.frag")) {
-    m_collider = Rectangular(m_model);
+LeftWall::LeftWall(Model model, std::shared_ptr<Shader> shader, Transformation transformation,
+                   ObjectType objectType, std::shared_ptr<Skybox> skybox)
+    : Wall(model, shader, transformation, objectType, skybox) {
     m_transformation.m_scale = {10.0f, 10.0f, 10.0f};
-    m_transformation.m_translation = {2.075f, 0.125f, 0.0f};
 }
 
 void LeftWall::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> lightManager) {
@@ -29,5 +28,5 @@ void LeftWall::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager
         m_shader->setPointLight("pointLights", lightManager->getPointLights()[i], i);
     }
 
-    m_model.draw(m_shader);
+    m_model.draw(m_shader, m_skybox->getTextureID());
 }

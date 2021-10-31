@@ -5,7 +5,8 @@
 SideBit::SideBit()
     : Object("./src/assets/PinballTable3/Frame_Bot.fbx",
              std::make_shared<Shader>("./src/shaders/pinball/basic.vert",
-                                      "./src/shaders/pinball/basic.frag")) {
+                                      "./src/shaders/pinball/basic.frag"),
+             ObjectType::STATIC) {
     m_collider = Rectangular(m_model);
     m_transformation.m_scale = {10.0f, 10.0f, 10.0f};
     m_transformation.m_translation = {0.0f, 0.125f, -4.113f};

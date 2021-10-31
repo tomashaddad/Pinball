@@ -3,10 +3,13 @@
 #include "Camera.h"
 #include "LightManager.h"
 #include "Object.h"
+#include "Wall.h"
 
-class RightWall : public Object {
+class Skybox;
+
+class RightWall : public Wall {
 public:
-    RightWall();
+    RightWall(std::shared_ptr<Skybox> skybox);
     virtual void draw(std::shared_ptr<Camera> camera,
                       std::shared_ptr<LightManager> lightManager) override;
 };

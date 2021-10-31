@@ -1,17 +1,19 @@
-#include "BottomWall.h"
+#include "RightWall.h"
 
+#include "Skybox.h"
 #include "collision/Rectangular.h"
 
-BottomWall::BottomWall()
-    : Object("./src/assets/PinballTable3/Frame_Bot.fbx",
-             std::make_shared<Shader>("./src/shaders/pinball/basic.vert",
-                                      "./src/shaders/pinball/basic.frag")) {
+RightWall::RightWall(std::shared_ptr<Skybox> skybox)
+    : Wall("./src/assets/PinballTable3/Frame_Right.fbx",
+           std::make_shared<Shader>("./src/shaders/pinball/basic.vert",
+                                    "./src/shaders/pinball/basic.frag"),
+           skybox, ObjectType::STATIC) {
     m_collider = Rectangular(m_model);
     m_transformation.m_scale = {10.0f, 10.0f, 10.0f};
-    // m_transformation.m_translation = {0.0f, 0.125f, -4.113f};
+    m_transformation.m_translation = {-2.075f, 0.125f, 0.0f};
 }
 
-void BottomWall::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> lightManager) {
+void RightWall::draw(std::shared_ptr<Camera> camera, std::shared_ptr<LightManager> lightManager) {
     glm::mat4 model = m_transformation.getModelMatrix();
     glm::mat4 view = camera->getViewMatrix();
     glm::mat4 projection = camera->getProjectionMatrix();
